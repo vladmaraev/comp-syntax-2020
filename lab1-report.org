@@ -22,6 +22,8 @@
 |  179 | DET   |
 |  130 | CCONJ |
 |  116 | PART  |
+
+
 **** English
 #+BEGIN_SRC sh
   cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
@@ -45,10 +47,14 @@
 |   42 | SYM   |
 |   16 | X     |
 |    1 | INTJ  |
+
+
 **** What does this tell about Japanese?
 1. Determiners are much more common in English, in Japanese they are almost do not exist.
 2. Pronouns are less frequent in Japanese, because they are commonly omitted. 
 3. Adpositions are more frequent in Japanese: for example, topic markers such as は (’as for me’) are very common and denoted as ADP.
+
+   
 *** Dependencies 
 **** Japanese
 #+BEGIN_SRC sh
@@ -81,6 +87,8 @@
 |   50 | appos      |
 |   45 | dislocated |
 |    1 | dep        |
+
+
 **** English
 #+BEGIN_SRC sh
   cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
@@ -135,11 +143,17 @@
 |    1 | goeswith     |
 |    1 | discourse    |
 |    1 | dep          |
+
+
 **** What does this tell about Japanese?
 1. ~aux~ dependency is much more common in Japanese, because auxiliary verbs are also more common. For example, verb auxiliaries in Japanese are used for marking politeness and continuation. There are also auxiliaries that are attached to nouns (see below).
 2. ~amod~ is much more common in English, whether ~acl~ is more common in Japanese. Relative clauses are very common in Japanese, probably due to formal nouns, such as もの and こと (‘thing’, ‘fact’  etc.) which commonly have clausal complement (to express nouns like "running" as "fact that someone runs").
+
+   
 ** Trees
 [[./img/jp-trees.png]]
+
+
 *** He then spent four years with BBC World Service radio at Bush House.
 #+BEGIN_EXAMPLE
 # newdoc id = n01072
