@@ -1,0 +1,232 @@
+* Chapter 1
+** Stats (1.4)
+*** POS 
+**** Japanese
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+#+RESULTS:
+| 6479 | ADP   |
+| 5982 | NOUN  |
+| 3739 | AUX   |
+| 2977 | PUNCT |
+| 2419 | VERB  |
+| 1408 | PROPN |
+| 1147 | SCONJ |
+|  723 | ADJ   |
+|  541 | NUM   |
+|  433 | PRON  |
+|  250 | ADV   |
+|  184 | SYM   |
+|  179 | DET   |
+|  130 | CCONJ |
+|  116 | PART  |
+**** English
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+#+RESULTS:
+| 4040 | NOUN  |
+| 2493 | ADP   |
+| 2451 | PUNCT |
+| 2156 | VERB  |
+| 2086 | DET   |
+| 1727 | PROPN |
+| 1540 | ADJ   |
+| 1021 | PRON  |
+| 1014 | AUX   |
+|  849 | ADV   |
+|  576 | CCONJ |
+|  455 | NUM   |
+|  426 | PART  |
+|  290 | SCONJ |
+|   42 | SYM   |
+|   16 | X     |
+|    1 | INTJ  |
+**** What does this tell about Japanese?
+1. Determiners are much more common in English, in Japanese they are almost do not exist.
+2. Pronouns are less frequent in Japanese, because they are commonly omitted. 
+3. Adpositions are more frequent in Japanese: for example, topic markers such as は (’as for me’) are very common and denoted as ADP.
+*** Dependencies 
+**** Japanese
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+#+RESULTS:
+| 6375 | case       |
+| 3399 | aux        |
+| 2977 | punct      |
+| 2320 | nmod       |
+| 1477 | compound   |
+| 1366 | nsubj      |
+| 1216 | mark       |
+| 1124 | advcl      |
+| 1087 | obl        |
+| 1000 | root       |
+|  929 | acl        |
+|  798 | obj        |
+|  713 | iobj       |
+|  529 | nummod     |
+|  370 | advmod     |
+|  291 | cop        |
+|  179 | det        |
+|  127 | amod       |
+|   96 | fixed      |
+|   95 | csubj      |
+|   75 | cc         |
+|   68 | ccomp      |
+|   50 | appos      |
+|   45 | dislocated |
+|    1 | dep        |
+**** English
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+#+RESULTS:
+| 2499 | case         |
+| 2451 | punct        |
+| 2047 | det          |
+| 1393 | nsubj        |
+| 1336 | amod         |
+| 1237 | obl          |
+| 1076 | nmod         |
+| 1000 | root         |
+|  876 | obj          |
+|  852 | advmod       |
+|  810 | compound     |
+|  634 | conj         |
+|  574 | cc           |
+|  555 | mark         |
+|  410 | aux          |
+|  365 | nmod:poss    |
+|  316 | cop          |
+|  293 | advcl        |
+|  274 | aux:pass     |
+|  271 | xcomp        |
+|  254 | nummod       |
+|  239 | nsubj:pass   |
+|  230 | flat         |
+|  211 | acl:relcl    |
+|  193 | acl          |
+|  143 | appos        |
+|  135 | ccomp        |
+|  103 | fixed        |
+|   97 | parataxis    |
+|   70 | compound:prt |
+|   62 | expl         |
+|   39 | nmod:tmod    |
+|   27 | csubj        |
+|   20 | obl:npmod    |
+|   19 | nmod:npmod   |
+|   18 | obl:tmod     |
+|   11 | cc:preconj   |
+|   10 | iobj         |
+|    9 | det:predet   |
+|    7 | orphan       |
+|    7 | _            |
+|    3 | csubj:pass   |
+|    2 | dislocated   |
+|    1 | vocative     |
+|    1 | reparandum   |
+|    1 | goeswith     |
+|    1 | discourse    |
+|    1 | dep          |
+**** What does this tell about Japanese?
+1. ~aux~ dependency is much more common in Japanese, because auxiliary verbs are also more common. For example, verb auxiliaries in Japanese are used for marking politeness and continuation. There are also auxiliaries that are attached to nouns (see below).
+2. ~amod~ is much more common in English, whether ~acl~ is more common in Japanese. Relative clauses are very common in Japanese, probably due to formal nouns, such as もの and こと (‘thing’, ‘fact’  etc.) which commonly have clausal complement (to express nouns like "running" as "fact that someone runs").
+** Trees
+[[./img/jp-trees.png]]
+*** He then spent four years with BBC World Service radio at Bush House.
+#+BEGIN_EXAMPLE
+# newdoc id = n01072
+# sent_id = n01072010
+# text = He then spent four years with BBC World Service radio at Bush House.
+1       He      he      PRON    PRP     Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs  3       nsubj   3:nsubj _
+2       then    then    ADV     RB      PronType=Dem    3       advmod  3:advmod        _
+3       spent   spend   VERB    VBD     Mood=Ind|Tense=Past|VerbForm=Fin        0       root    0:root  _
+4       four    four    NUM     CD      NumType=Card    5       nummod  5:nummod        _
+5       years   year    NOUN    NNS     Number=Plur     3       nmod:tmod       3:nmod:tmod     _
+6       with    with    ADP     IN      _       10      case    10:case _
+7       BBC     BBC     PROPN   NNP     Number=Sing     9       compound        9:compound      _
+8       World   world   NOUN    NN      Number=Sing     9       compound        9:compound      _
+9       Service service NOUN    NN      Number=Sing     10      compound        10:compound     _
+10      radio   radio   NOUN    NN      Number=Sing     3       obl     3:obl:with      _
+11      at      at      ADP     IN      _       13      case    13:case _
+12      Bush    Bush    PROPN   NNP     Number=Sing     13      compound        13:compound     _
+13      House   house   PROPN   NN      Number=Sing     3       obl     3:obl:at        SpaceAfter=No
+14      .       .       PUNCT   .       _       3       punct   3:punct _
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+# sent_id = n01072010
+# text = その後、ブッシュハウスで4年をBBCワールドサービスラジオとともに過ごした。
+# text_en = He then spent four years with BBC World Service radio at Bush House.
+1       その後  その後  NOUN    NR      _       13      obl     _       SpaceAfter=No
+2       、      、      PUNCT   SYM     _       1       punct   _       SpaceAfter=No
+3       ブッシュハウス  ブッシュハウス  PROPN   NNP     _       13      obl     _       SpaceAfter=No
+4       で      で      ADP     PS      _       3       case    _       SpaceAfter=No
+5       4       4       NUM     CD      NumType=Card    6       nummod  _       SpaceAfter=No
+6       年      年      NOUN    XSC     _       13      obj     _       SpaceAfter=No
+7       を      を      ADP     PS      _       6       case    _       SpaceAfter=No
+8       BBC     BBC     PROPN   NNP     _       11      compound        _       SpaceAfter=No
+9       ワールド        ワールド        NOUN    NN      _       11      compound        _       SpaceAfter=No
+10      サービス        サービス        NOUN    NN      _       11      compound        _       SpaceAfter=No
+11      ラジオ  ラジオ  NOUN    NN      _       13      obl     _       SpaceAfter=No
+12      とともに        とともに        ADP     PP      _       11      case    _       SpaceAfter=No
+13      過ごし  過ごす  VERB    VV      _       0       root    _       SpaceAfter=No
+14      た      た      AUX     AV      _       13      aux     _       SpaceAfter=No
+15      。      。      PUNCT   SYM     _       13      punct   _       SpaceAfter=No
+#+END_EXAMPLE
+*** I also struggle with passwords.
+#+BEGIN_EXAMPLE
+# sent_id = n01077018
+# text = I also struggle with passwords.
+1       I       I       PRON    PRP     Case=Nom|Number=Sing|Person=1|PronType=Prs      3       nsubj   3:nsubj _
+2       also    also    ADV     RB      _       3       advmod  3:advmod        _
+3       struggle        struggle        VERB    VBP     Mood=Ind|Tense=Pres|VerbForm=Fin        0       root    0:root  _
+4       with    with    ADP     IN      _       5       case    5:case  _
+5       passwords       password        NOUN    NNS     Number=Plur     3       obl     3:obl:with      SpaceAfter=No
+6       .       .       PUNCT   .       _       3       punct   3:punct _
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+# sent_id = n01077018
+# text = 私はパスワードにも苦労している。
+# text_en = I also struggle with passwords.
+1       私      私      PRON    NP      _       6       nsubj   _       SpaceAfter=No
+2       は      は      ADP     PK      _       1       case    _       SpaceAfter=No
+3       パスワード      パスワード      NOUN    NN      _       6       iobj    _  SpaceAfter=No
+4       に      に      ADP     PS      _       3       case    _       SpaceAfter=No
+5       も      も      ADP     PK      _       3       case    _       SpaceAfter=No
+6       苦労    苦労    VERB    VV      _       0       root    _       SpaceAfter=No
+7       し      する    AUX     XV      _       6       aux     _       SpaceAfter=No
+8       て      て      SCONJ   PC      _       6       mark    _       SpaceAfter=No
+9       いる    いる    AUX     AV      _       6       aux     _       SpaceAfter=No
+10      。      。      PUNCT   SYM     _       6       punct   _       SpaceAfter=No
+#+END_EXAMPLE
+
+** alignment
+#+BEGIN_EXAMPLE
+1       He         _
+2       then       1       その後     (note: NOUN vs ADV)
+                   2       、
+3       spent      13      過ごし
+_       _          14      た
+4       four       5       4
+5       years      6       年
+_       _          7       を
+6       with       12      とともに
+7       BBC        8       BBC
+8       World      9       ワールド
+9       Service    10      サービス 
+10      radio      11      ラジオ  
+11      at         4       で
+12      Bush       3       ブッシュハウス
+13      House      3       ブッシュハウス
+14      .          15      。                    
+#+END_EXAMPLE
+
