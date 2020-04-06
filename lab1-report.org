@@ -6,7 +6,6 @@
   cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
 #+END_SRC
 
-#+RESULTS:
 | 6479 | ADP   |
 | 5982 | NOUN  |
 | 3739 | AUX   |
@@ -29,7 +28,6 @@
   cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
 #+END_SRC
 
-#+RESULTS:
 | 4040 | NOUN  |
 | 2493 | ADP   |
 | 2451 | PUNCT |
@@ -61,7 +59,6 @@
   cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
 #+END_SRC
 
-#+RESULTS:
 | 6375 | case       |
 | 3399 | aux        |
 | 2977 | punct      |
@@ -94,7 +91,6 @@
   cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
 #+END_SRC
 
-#+RESULTS:
 | 2499 | case         |
 | 2451 | punct        |
 | 2047 | det          |
