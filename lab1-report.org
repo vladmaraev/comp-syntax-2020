@@ -301,7 +301,7 @@ _       _          7       を
 ** PUD types
 *** Nouns
 #+NAME: noun
-#+BEGIN_SRC sh :results value
+#+BEGIN_SRC sh :results value :exports both
 cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
 #+END_SRC
 
@@ -315,7 +315,7 @@ Features:
 | 76 | Number=  |
 
 Values:
-#+BEGIN_SRC sh :results value :var feat=noun
+#+BEGIN_SRC sh :results value :var feat=noun :exports both
   for i in $feat
   do
       cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
@@ -341,7 +341,7 @@ Values:
 *** Adjectives
 Features:
 #+NAME: adj
-#+BEGIN_SRC sh :results value
+#+BEGIN_SRC sh :results value :exports both
 cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
 #+END_SRC
 
@@ -354,7 +354,7 @@ cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep 
 |  4 | Variant= |
 
 Values:
-#+BEGIN_SRC sh :results value :var feat=adj
+#+BEGIN_SRC sh :results value :var feat=adj :exports both
   for i in $feat
   do
       cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
@@ -382,7 +382,7 @@ Values:
 *** Verbs
 Features:
 #+NAME: verb
-#+BEGIN_SRC sh :results value
+#+BEGIN_SRC sh :results value :exports both
 cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
 #+END_SRC
 
@@ -402,7 +402,7 @@ cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep 
 | 146 | Voice=    |
 
 Values:
-#+BEGIN_SRC sh :results value :var feat=verb
+#+BEGIN_SRC sh :results value :var feat=verb :exports both
   for i in $feat
   do
       cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
