@@ -48,7 +48,9 @@
 
 
 **** What does this tell about Japanese?
-1. Determiners are much more common in English, in Japanese they are almost do not exist.
+1. Determiners are much more common in English, in Japanese only
+   demonstrative pronouns (that) fall into the category, as there are
+   no definite and indefinite articles.
 2. Pronouns are less frequent in Japanese, because they are commonly omitted. 
 3. Adpositions are more frequent in Japanese: for example, topic markers such as は (’as for me’) are very common and denoted as ADP.
 
@@ -240,3 +242,204 @@ _       _          7       を
 14      .          15      。                    
 #+END_EXAMPLE
 
+* Chapter 2
+** Morphological types
+*** Nouns:
+- inherent features
+  - gender (feminine, masculine, neuter, +common)
+  - animacy (animate, inanimate)
+- inflectional features
+  - case (nominative, accusative, genetive, dative, instrumental, prepositional, + additional cases (locative, partitive, vocative, countable form))
+  - number (singular, plural)
+  - diminutives/augmentatives
+
+| feature | typical values                 | examples                                                           |
+|---------+--------------------------------+--------------------------------------------------------------------|
+| gender  | f, m, n, common                | скала (rock), порох (gunpowder), окно (window), пьяница (drunkard) |
+| case    | nom, acc, gen, dat, inst, prep | скала, скалу, скалы, скале, скалой, скале                          |
+| number  | sg, pl                         | скала, скалы                                                       |
+| animacy | an, inan                       | собака (dog), скала                                                |
+| dim/aug | dim, aug                       | зверёк (a small beast), зверина (a massive beast)                  |
+
+
+
+*** Adjectives:
+- inherent features
+  - groups (qualitative, relational, posessive)
+- agreement
+  - gender, number, case
+- inflectional features
+  - case (basic cases for nouns + short form for nominative)
+  - degree (positive, comparative, superlative)
+
+| feature | typical values                       | examples                                              |
+|---------+--------------------------------------+-------------------------------------------------------|
+| group   | qual, rel, pos                       | большой (big), больший (bigger), Петин (Pete’s)       |
+| case    | nom, acc, gen, dat, inst, prep, shrt | новый (new), новый, нового, новому, новым, новый, нов |
+| degree  | pos, cmp, sup                        | новый, новее, новейший                                |
+
+
+*** Verbs
+- inherent features
+  - 
+- inflectional features:
+  - person (1, 2, 3)
+  - number (singular, plural)
+  - tense (present/future, past) ??
+  - aspect (imperfective, perfective)
+  - reflexive (-, +)
+  - voice (active, passive)
+  - mood (indicative, imperative, conditional, subjunctive)
+
+| feature   | typical values       | examples                    |
+|-----------+----------------------+-----------------------------|
+| aspect    | imperf, perf         | писать (to write), написать |
+| reflexive | -, +                 | мыть, мыться                |
+| voice     | active, passive      | ловил, ловился              |
+| mood      | ind, imp, cond, subj | ...                         |
+
+** PUD types
+*** Nouns
+#+NAME: noun
+#+BEGIN_SRC sh :results value
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+Features:
+#+RESULTS: noun
+| 11 | Abbr=    |
+| 76 | Animacy= |
+| 76 | Case=    |
+|  1 | Foreign= |
+| 76 | Gender=  |
+| 76 | Number=  |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=noun
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+| 11 | Abbr=Yes     |
+| 33 | Animacy=Anim |
+| 43 | Animacy=Inan |
+| 12 | Case=Acc     |
+| 11 | Case=Dat     |
+| 17 | Case=Gen     |
+| 11 | Case=Ins     |
+| 11 | Case=Loc     |
+| 14 | Case=Nom     |
+|  1 | Foreign=Yes  |
+| 26 | Gender=Fem   |
+| 31 | Gender=Masc  |
+| 19 | Gender=Neut  |
+| 36 | Number=Plur  |
+| 40 | Number=Sing  |
+*** Adjectives
+Features:
+#+NAME: adj
+#+BEGIN_SRC sh :results value
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+#+RESULTS: adj
+|  5 | Animacy= |
+| 32 | Case=    |
+| 38 | Degree=  |
+| 28 | Gender=  |
+| 37 | Number=  |
+|  4 | Variant= |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=adj
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+|  2 | Animacy=Anim  |
+|  3 | Animacy=Inan  |
+|  8 | Case=Acc      |
+|  4 | Case=Dat      |
+|  6 | Case=Gen      |
+|  6 | Case=Ins      |
+|  4 | Case=Loc      |
+|  4 | Case=Nom      |
+|  1 | Degree=Cmp    |
+| 32 | Degree=Pos    |
+|  5 | Degree=Sup    |
+|  7 | Gender=Fem    |
+| 11 | Gender=Masc   |
+| 10 | Gender=Neut   |
+| 10 | Number=Plur   |
+| 27 | Number=Sing   |
+|  4 | Variant=Short |
+*** Verbs
+Features:
+#+NAME: verb
+#+BEGIN_SRC sh :results value
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+#+RESULTS: verb
+|   1 | Abbr=     |
+|  15 | Animacy=  |
+| 146 | Aspect=   |
+|  87 | Case=     |
+|   1 | Degree=   |
+|  76 | Gender=   |
+|  45 | Mood=     |
+| 137 | Number=   |
+|  25 | Person=   |
+| 140 | Tense=    |
+|   5 | Variant=  |
+| 146 | VerbForm= |
+| 146 | Voice=    |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=verb
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+|  1 | Abbr=Yes      |
+|  5 | Animacy=Anim  |
+| 10 | Animacy=Inan  |
+| 83 | Aspect=Imp    |
+| 63 | Aspect=Perf   |
+| 21 | Case=Acc      |
+|  8 | Case=Dat      |
+| 19 | Case=Gen      |
+| 12 | Case=Ins      |
+|  9 | Case=Loc      |
+| 18 | Case=Nom      |
+|  1 | Degree=Pos    |
+| 23 | Gender=Fem    |
+| 31 | Gender=Masc   |
+| 22 | Gender=Neut   |
+|  1 | Mood=Imp      |
+| 44 | Mood=Ind      |
+| 49 | Number=Plur   |
+| 88 | Number=Sing   |
+|  7 | Person=1      |
+|  7 | Person=2      |
+| 11 | Person=3      |
+|  9 | Tense=Fut     |
+| 70 | Tense=Past    |
+| 61 | Tense=Pres    |
+|  5 | Variant=Short |
+|  4 | VerbForm=Conv |
+| 45 | VerbForm=Fin  |
+|  5 | VerbForm=Inf  |
+| 92 | VerbForm=Part |
+| 61 | Voice=Act     |
+| 41 | Voice=Mid     |
+| 44 | Voice=Pass    |
