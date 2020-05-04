@@ -1,0 +1,323 @@
+# text_en = Who:<PRON> are:<AUX> they:<PRON> ?:<PUNCT>
+1	Who	_	PRON	_	_	0	root	_	_
+2	are	_	AUX	_	_	1	cop	_	_
+3	they	_	PRON	_	_	1	nsubj	_	_
+4	?	_	PUNCT	_	_	1	punct	_	_
+
+# text_ru = Кто:<PRON> они:<PRON> ?:<PUNCT>
+1	кто	_	PRON	_	_	0	root	_	_
+2	они	_	PRON	_	_	1	nsubj	_	_
+3	?	_	PUNCT	_	_	1	punct	_	_
+
+# text_en = A:<DET> small:<ADJ> town:<NOUN> with:<ADP> two:<NUM> minarets:<NOUN> glides:<VERB> by:<ADV> .:<PUNCT>
+1	A	_	DET	_	_	3	det	_	_
+2	small	_	ADJ	_	_	3	amod	_	_
+3	town	_	NOUN	_	_	7	nsubj	_	_
+4	with	_	ADP	_	_	6	case	_	_
+5	two	_	NUM	_	_	6	nummod	_	_
+6	minarets	_	NOUN	_	_	3	nmod	_	_
+7	glides	_	VERB	_	_	0	root	_	_
+8	by	_	ADV	_	_	7	advmod	_	_
+9	.	_	PUNCT	_	_	7	punct	_	_
+
+# text_ru = маленький:<ADJ> город:<NOUN> с:<ADP> двумя:<NUM> минаретами:<NOUN> проплывает:<VERB> мимо:<ADV> .:<PUNCT>
+1	маленький	_	ADJ	_	_	2	amod	_	_
+2	город	_	NOUN	_	_	6	nsubj	_	_
+3	с	_	ADP	_	_	5	case	_	_
+4	двумя	_	NUM	_	_	5	nummod	_	_
+5	минаретами	_	NOUN	_	_	2	nmod	_	_
+6	проплывает	_	VERB	_	_	0	root	_	_
+7	мимо	_	ADV	_	_	6	advmod	_	_
+8	.	_	PUNCT	_	_	6	punct	_	_
+
+
+# text_en = I:<PRON> was:<AUX> just:<ADV> a:<DET> boy:<NOUN> with:<ADP> muddy:<ADJ> shoes:<NOUN> .:<PUNCT>
+1	I	_	PRON	_	_	2	nsubj	_	_
+2	was	_	AUX	_	_	0	root	_	_
+3	just	_	ADV	_	_	5	advmod	_	_
+4	a	_	DET	_	_	5	det	_	_
+5	boy	_	NOUN	_	_	2	obj	_	_
+6	with	_	ADP	_	_	8	case	_	_
+7	muddy	_	ADJ	_	_	8	amod	_	_
+8	shoes	_	NOUN	_	_	5	nmod	_	_
+9	.	_	PUNCT	_	_	2	punct	_	_
+
+# text_ru = Я:<PRON> был:<AUX> лишь:<ADV> мальчиком:<NOUN> в:<ADP> грязных:<ADJ> ботинках:<NOUN> .:<PUNCT>
+1	Я	_	PRON	_	_	2	nsubj	_	_
+2	был	_	AUX	_	_	0	root	_	_
+3	лишь	_	ADV	_	_	4	advmod	_	_
+4	мальчиком	_	NOUN	_	_	2	iobj	_	_
+5	в	_	ADP	_	_	7	case	_	_
+6	грязных	_	ADJ	_	_	7	amod	_	_
+7	ботинках	_	NOUN	_	_	4	nmod	_	_
+8	.	_	PUNCT	_	_	2	punct	_	_
+
+
+# text_en = Shenzhen:<PROPN> 's:<PART> traffic:<NOUN> police:<NOUN> have:<AUX> opted:<VERB> for:<ADP> unconventional:<ADJ> penalties:<NOUN> before:<ADV> .:<PUNCT>.:<PUNCT>
+1	Shenzhen	_	PROPN	_	_	4	nmod:poss	_	_
+2	's	_	PART	_	_	2	case	_	_
+3	traffic	_	NOUN	_	_	4	nmod	_	_
+4	police	_	NOUN	_	_	6	nsubj	_	_
+5	have	_	AUX	_	_	6	aux	_	_
+6	opted	_	VERB	_	_	0	root	_	_
+7	for	_	ADP	_	_	9	case	_	_
+8	unconventional	_	ADJ	_	_	9	amod	_	_
+9	penalties	_	NOUN	_	_	6	obl	_	_
+10	before	_	ADV	_	_	6	advmod	_	_
+11	.	_	PUNCT	_	_	6	punct	_	_
+
+# text_ru = Шеньженьская:<ADJ> дорожная:<ADJ> полиция:<NOUN> и:<CCONJ> ранее:<ADV> предпочитала:<VERB> нетрадиционные:<ADJ> взыскания:<NOUN> .:<PUNCT>
+1	Шеньженьская	_	ADJ	_	_	3	amod	_	_
+2	дорожная	_	ADJ	_	_	3	amod	_	_
+3	полиция	_	NOUN	_	_	6	nsubj	_	_
+4	и	_	CCONJ	_	_	6	cc	_
+5	ранее	_	ADV	_	_	6	advmod	_	_
+6	предпочитала	_	NOUN	_	_	0	root	_	_
+7	нетрадиционные	_	ADJ	_	_	8	amod	_	_
+8	взыскания	_	NOUN	_	_	6	obj	_	_
+9	.	_	PUNCT	_	_	6	punct		_	_
+
+
+# text_en = The:<DET> study:<NOUN> of:<ADP> volcanoes:<NOUN> is:<AUX> called:<VERB> volcanology:<NOUN> ,:<PUNCT> sometimes:<ADV> spelled:<VERB> vulcanology:<NOUN> .:<PUNCT>
+1	The	_	DET	_	_	2	det	_	_
+2	study	_	NOUN	_	_	6	nsubj:pass	_	_
+3	of	_	ADP	_	_	4	case	_	_
+4	volanoes	_	NOUN	_	_	2	nmod	_	_
+5	is	_	AUX	_	_	6	aux:pass	_	_
+6	called	_	VERB	_	_	0	root	_	_
+7	volcanology	_	NOUN	_	_	6	xcomp	_	_
+8	,	_	PUNCT	_	_	7	punct	_	_
+9	sometimes	_	ADV	_	_	10	advmod	_	_
+10	spelled	_	VERB	_	_	7	acl	_	_
+11	vulcanology	_	NOUN	_	_	10	xcomp	_	_
+12	.	_	PUNCT	_	_	6	punct	_	_
+
+# text_ru = Изучением вулканов занимается вулканология.
+# NOTE: in gold corpus 1 is marked as iobj, but according to the guidelines:
+#       "In general, if there is just one object, it should be labeled obj, regardless of the morphological case or semantic role."
+#       https://universaldependencies.org/ru/dep/iobj.html
+1	Изучением	_	NOUN	_	_	3	obj	_	_
+2	вулканов	_	NOUN	_	_	1	nmod	_	_
+3	занимается	_	VERB	_	_	0	root	_	_
+4	вулканология	_	NOUN	_	_	3	nsubj	_	_
+5	.	_	PUNCT	_	_	3	punct	_	_
+
+
+# text_en = It:<PRON> was:<AUX> conducted:<VERB> just:<ADV> off:<ADP> the:<DET> Mexican:<ADJ> coast:<NOUN> from:<ADP> April:<PROPN> to:<ADP> June:<PROPN> .:<PUNCT>
+1	It	_	PRON	_	_	3	nsubj:pass	_	_
+2	was	_	AUX	_	_	3	aux:pass	_	_
+3	conducted	_	VERB	_	_	0	root	_	_
+4	just	_	ADV	_	_	8	advmod	_	_
+5	off	_	ADP	_	_	8	case	_	_
+6	the	_	DET	_	_	8	det	_	_
+7	Mexican	_	ADJ	_	_	8	amod	_	_
+8	coast	_	NOUN	_	_	3	obl	_	_
+9	from	_	ADP	_	_	10	case	_	_
+10	April	_	NOUN	_	_	3	obl	_	_
+11	to	_	ADP	_	_	12	case	_	_
+12	June	_	NOUN	_	_	10	nmod	_	_
+13	.	_	PUNCT	_	_	3	punct	_	_
+
+# text_ru = Он проводился около с Мексиканского побережья с апреля по июнь.
+# NOTE: 9 is attached according to english UD, in Russian gold PUD it is attached to 2
+1	Он	_	PRON	_	_	2	nsubj:pass	_	_
+2	проводился	_	VERB	_	_	0	root	_	_
+3	около	_	ADV	_	_	5	advmod	_	_
+4	Мексиканского	_	ADJ	_	_	5	amod	_	_
+5	побережья	_	NOUN	_	_	2	obl	_	_
+6	с	_	ADP	_	_	7	case	_	_
+7	апреля	_	NOUN	_	_	2	obl	_	_
+8	по	_	ADP	_	_	9	case	_	_
+9	июнь	_	NOUN	_	_	7	nmod	_	_
+10	.	_	PUNCT	_	_	2	punct	_	_
+
+
+# ":<PUNCT> Her:<PRON> voice:<NOUN> literally:<ADV> went:<VERB> around:<ADP> the:<DET> world:<NOUN> ,:<PUNCT> ":<PUNCT> Leive:<PROPN> said:<VERB> .:<PUNCT>
+# A:<DET> witness:<NOUN> told:<VERB> police:<NOUN> that:<SCONJ> the:<DET> victim:<NOUN> had:<AUX> attacked:<VERB> the:<DET> suspect:<NOUN> in:<ADP> April:<PROPN> .:<PUNCT>
+# It:<PRON> 's:<AUX> most:<ADV> obvious:<ADJ> when:<ADV> a:<DET> celebrity:<NOUN> 's:<PART> name:<NOUN> is:<AUX> initially:<ADV> quite:<ADV> rare:<ADJ> .:<PUNCT>
+# This:<PRON> has:<AUX> not:<PART> stopped:<VERB> investors:<NOUN> flocking:<VERB> to:<PART> put:<VERB> their:<PRON> money:<NOUN> in:<ADP> the:<DET> funds:<NOUN> .:<PUNCT>
+# This:<DET> discordance:<NOUN> between:<ADP> economic:<ADJ> data:<NOUN> and:<CCONJ> political:<ADJ> rhetoric:<NOUN> is:<AUX> familiar:<ADJ> ,:<PUNCT> or:<CCONJ> should:<AUX> be:<AUX> .:<PUNCT>
+# The:<DET> feasibility:<NOUN> study:<NOUN> estimates:<VERB> that:<SCONJ> it:<PRON> would:<AUX> take:<VERB> passengers:<NOUN> about:<ADV> four:<NUM> minutes:<NOUN> to:<PART> cross:<VERB> the:<DET> Potomac:<PROPN> River:<PROPN> on:<ADP> the:<DET> gondola:<NOUN> .:<PUNCT>
+
+
+# text_en = he collected cards and traded them with the other boys
+1	he	_	PRON	_	_	2	nsubj	_	_
+2	collected	_	VERB	_	_	0	root	_	_
+3	cards	_	NOUN	_	_	2	obj	_	_
+4	and	_	CCONJ	_	_	5	cc	_	_
+5	traded	_	VERB	_	_	2	conj	_	_
+6	them	_	PRON	_	_	5	obj	_	_
+7	with	_	ADP	_	_	10	case	_	_
+8	the	_	DET	_	_	10	det	_	_
+9	other	_	ADJ	_	_	10	amod	_	_
+10	boys	_	NOUN	_	_	5	obl	_	_
+
+# text_ru = он собирал карты и торговал ими с другими мальчиками
+1	он	_	PRON	_	_	1	nsubj	_
+2	собирал	_	VERB	_	_	0	root	_
+3	карты	_	NOUN	_	_	2	obj	_
+4	и	_	CCONJ	_	_	5	cc	_
+5	торговал	_	VERB	_	_	2	conj	_
+6	ими	_	NOUN	_	_	5	cc	_
+7	с	_	ADP	_	_	9	case	_
+8	другими	_	ADJ	_	_	9	amod	_
+9	мальчиками	_	NOUN	_	_	5	obl	_
+
+
+# text_en = this crime carries a penalty of five years in prison
+1	this	_	PRON	_	_	2	det	_	_
+2	crime	_	NOUN	_	_	3	nsubj	_	_
+3	carries	_	VERB	_	_	0	root	_	_
+4	a	_	DET	_	_	5	det	_	_
+5	pentalty	_	NOUN	_	_	3	obj	_	_
+6	of	_	ADP	_	_	8	case	_	_
+7	five	_	NUM	_	_	8	nummod	_	_
+8	years	_	NOUN	_	_	5	nmod	_	_
+9	in	_	ADP	_	_	10	case	_	_
+10	prison	_	NOUN	_	_	8	nmod	_	_
+
+# text_ru = это преступление подразумевает тюремное заключение на 5 лет
+1	это	_	PRON	_	_	2	det	_	_
+2	преступление	_	NOUN	_	_	3	nsubj	_	_
+3	подразумевает	_	VERB	_	_	0	root	_	_
+4	тюремное	_	ADJ	_	_	5	amod	_	_
+5	заключение	_	NOUN	_	_	3	obj	_	_
+6	на	_	ADP	_	_	8	case	_	_
+7	5	_	NUM	_	_	8	nummod	_	_
+8	лет	_	NOUN	_	_	5	nmod	_	_
+
+
+# text_en = the news was carried to every village in the province
+1	the	_	DET	_	_	2	det	_	_
+2	news	_	NOUN	_	_	4	nsubj:pass	_	_
+3	was	_	AUX	_	_	4	aux:pass	_	_
+4	carried	_	VERB	_	_	0	root	_	_
+5	to	_	ADP	_	_	7	case	_	_
+6	every	_	PRON	_	_	7	det	_	_
+7	village	_	NOUN	_	_	4	obl	_	_
+8	in	_	ADP	_	_	10	case	_	_
+9	the	_	DET	_	_	10	det	_	_
+10	province	_	NOUN	_	_	7	nmod	_	_
+
+# text_ru = новости разнеслись по всем деревням района
+1	новости	_	NOUN	_	_	2	nsubj:pass	_	_
+2	разнеслись	_	VERB	_	_	0	root	_	_
+3	по	_	ADP	_	_	5	case	_	_
+4	всем	_	PRON	_	_	5	det	_	_
+5	деревням	_	NOUN	_	_	2	obl	_	_
+6	района	_	NOUN	_	_	5	nmod	_	_
+
+
+# text_en = I carry these thoughts in the back of my head
+1	I	_	PRON	_	_	2	nsubj	_	_
+2	carry	_	VERB	_	_	0	root	_	_
+3	these	_	DET	_	_	4	det	_	_
+4	thoughts	_	NOUN	_	_	2	obj	_	_
+5	in	_	ADP	_	_	7	case	_	_
+6	the	_	DET	_	_	7	det	_	_
+7	back	_	NOUN	_	_	2	obl	_	_
+8	of	_	ADP	_	_	10	case	_	_
+9	my	_	PRON	_	_	10	det	_	_
+10	head	_	NOUN	_	_	7	nmod	_	_
+
+# text_ru = Я несу эти мысли в глубине сознания
+1	Я	_	PRON	_	_	2	_	_	_
+2	несу	_	VERB	_	_	0	_	_	_
+3	эти	_	DET	_	_	4	_	_	_
+4	мысли	_	NOUN	_	_	2	_	_	_
+5	в	_	ADP	_	_	6	_	_	_
+6	глубине	_	NOUN	_	_	2	_	_	_
+7	сознания	_	NOUN	_	_	6	_	_	_
+
+
+# text_en = Adam would have been carried over into the life eternal
+1	Adam	_	NOUN	_	_	5	nsubj:pass	_	_
+2	would	_	AUX	_	_	5	aux	_	_
+3	have	_	AUX	_	_	5	aux	_	_
+4	been	_	AUX	_	_	5	aux:pass	_	_
+5	carried	_	VERB	_	_	0	root	_	_
+6	over	_	ADP	_	_	5	compound	_	_
+7	into	_	ADP	_	_	9	case	_	_
+8	the	_	DET	_	_	9	det	_	_
+9	life	_	NOUN	_	_	5	obl	_	_
+10	eternal	_	ADJ	_	_	9	amod	_	_
+
+# text_ru = Адам был бы перенесен в вечную жизнь
+1	Адам	_	NOUN	_	_	4	nsubj:pass	_	_
+2	был	_	AUX	_	_	4	aux	_	_
+3	бы	_	AUX	_	_	4	aux	_	_
+4	перенесен	_	VERB	_	_	0	root	_	_
+5	в	_	ADP	_	_	7	case	_	_
+6	вечную	_	ADJ	_	_	7	amod	_	_
+7	жизнь	_	NOUN	_	_	4	obl	_	_
+
+
+# text_en = the casings had rotted away and had to be replaced
+1	the	_	DET	_	_	2	det	_	_
+2	casings	_	NOUN	_	_	4	nsubj	_	_
+3	had	_	AUX	_	_	4	aux	_	_
+4	rotted	_	VERB	_	_	0	root	_	_
+5	away	_	ADP	_	_	4	compound	_	_
+6	and	_	CCONJ	_	_	7	cc	_	_
+7	had	_	AUX	_	_	4	conj	_	_
+8	to	_	PART	_	_	10	mark	_	_
+9	be	_	AUX	_	_	10	aux:pass	_	_
+10	replaced	_	VERB	_	_	7	xcomp	_	_
+
+# text_ru = Обшивка прогнила и ее нужно было заменить
+1	Обшивка	_	NOUN	_	_	2	nsubj	_	_
+2	прогнила	_	VERB	_	_	0	root	_	_
+3	и	_	CCONJ	_	_	5	cc	_	_
+4	ее	_	PRON	_	_	5	nsubj	_	_
+5	нужно	_	VERB	_	_	2	conj	_	_
+6	было	_	AUX	_	_	7	aux	_	_
+7	заменить	_	VERB	_	_	5	xcomp	_	_
+
+
+# text_en = she was incensed that this chit of a girl should dare to make a fool of her in front of the class
+1	she	_	PRON	_	_	3	nsubj	_	_
+2	was	_	AUX	_	_	3	aux	_	_
+3	incensed	_	VERB	_	_	0	root	_	_
+4	that	_	SCONJ	_	_	11	mark	_	_
+5	this	_	DET	_	_	6	det	_	_
+6	chit	_	NOUN	_	_	11	nsubj	_	_
+7	of	_	ADP	_	_	9	case	_	_
+8	a	_	DET	_	_	9	det	_	_
+9	girl	_	NOUN	_	_	6	nmod	_	_
+10	should	_	AUX	_	_	11	aux	_	_
+11	dare	_	VERB	_	_	3	ccomp	_	_
+12	to	_	PART	_	_	13	mark	_	_
+13	make	_	VERB	_	_	11	xcomp	_	_
+14	a	_	DET	_	_	15	det	_	_
+15	fool	_	NOUN	_	_	13	obj	_	_
+16	of	_	ADP	_	_	17	case	_	_
+17	her	_	PRON	_	_	13	obl	_	_
+18	in	_	ADP	_	_	19	case	_	_
+19	front	_	NOUN	_	_	13	obl	_	_
+20	of	_	ADP	_	_	22	case	_	_
+21	the	_	DET	_	_	22	det	_	_
+22	class	_	NOUN	_	_	19	nmod	_	_
+
+# text_ru = Она пришла в ярость от того, что эта девчонка осмеливается выставить ее дурой перед классом
+1	Она	_	PRON	_	_	2	nsubj	_	_
+2	пришла	_	VERB	_	_	0	root	_	_
+3	в	_	ADP	_	_	4	case	_	_
+4	ярость	_	NOUN	_	_	2	obl	_	_
+5	от	_	ADP	_	_	6	case	_	_
+6	того	_	PRON	_	_	4	nmod	_	_
+7	,	_	PUNCT	_	_	11	punct	_	_
+8	что	_	SCONJ	_	_	11	mark	_	_
+9	эта	_	DET	_	_	10	det	_	_
+10	девчонка	_	NOUN	_	_	11	nsubj	_	_
+11	осмеливается	_	VERB	_	_	6	ccomp	_	_
+12	выставить	_	VERB	_	_	11	xcomp	_	_
+13	ее	_	PRON	_	_	12	obj	_	_
+14	дурой	_	NOUN	_	_	12	iobj	_	_
+15	перед	_	ADP	_	_	16	case	_	_
+16	классом	_	NOUN	_	_	12	obl	_	_
+
+# the landslide he had in the electoral college obscured the narrowness of a victory based on just 43% of the popular vote
+# United States troops now carry atropine and autoinjectors in their first-aid kits to use in case of organophosphate nerve agent poisoning
+# he may accomplish by craft in the long run what he cannot do by force and violence in the short one
+# it has been said that only a hierarchical society with a leisure class at the top can produce works of art
+# his ingenuous explanation that he would not have burned the church if he had not thought the bishop was in it
