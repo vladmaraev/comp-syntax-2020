@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 #+LATEX_HEADER: \usepackage[linguistics]{forest}
 #+LATEX_HEADER: \forestset{pad/.style={minimum width=5em}}
 
+=======
+>>>>>>> 01bfb87874644b4d334af467411f903287b39f4b
 * Chapter 1
 ** Stats (1.4)
 *** POS 
@@ -448,6 +451,7 @@ Values:
 | 44 | Voice=Pass    |
 * Chapter 3
 [[lab1.conllu]]
+<<<<<<< HEAD
 * Chapter 4
 ~ 10 trees 
 - A small town with two minarets glides by.\\
@@ -460,3 +464,5 @@ Values:
 - [NP [PRON He]] (V (VERB collected)) (NP (NOUN cards)) (CONJ and) (VP (VERB traded) (PRON them) [ADP with] (NP [DET the] [ADJ other] [NOUN boys])
 - ((Utt (QS (IP Who) (Cop are) (Comp (NP (Prop they)))) (Punct ?))
 
+=======
+>>>>>>> 01bfb87874644b4d334af467411f903287b39f4b
