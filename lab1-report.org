@@ -1,3 +1,6 @@
+#+LATEX_HEADER: \usepackage[linguistics]{forest}
+#+LATEX_HEADER: \forestset{pad/.style={minimum width=5em}}
+
 * Chapter 1
 ** Stats (1.4)
 *** POS 
@@ -445,3 +448,15 @@ Values:
 | 44 | Voice=Pass    |
 * Chapter 3
 [[lab1.conllu]]
+* Chapter 4
+~ 10 trees 
+- A small town with two minarets glides by.\\
+  \begin{forest}
+  [S [NP [DET [the]]
+         [CN  [CN [[AP [small]] [CN [town]]]]
+              [AP [NP_{obl} [Prep [with]] [NP [Num [two]] [NP [minarets]]]]]]]
+     [VP [[V [glides]] [ADV [by]]]]]
+  \end{forest}
+- [NP [PRON He]] (V (VERB collected)) (NP (NOUN cards)) (CONJ and) (VP (VERB traded) (PRON them) [ADP with] (NP [DET the] [ADJ other] [NOUN boys])
+- ((Utt (QS (IP Who) (Cop are) (Comp (NP (Prop they)))) (Punct ?))
+
