@@ -1,9 +1,11 @@
-<<<<<<< HEAD
+#+LATEX_HEADER: \usepackage{fontspec}
 #+LATEX_HEADER: \usepackage[linguistics]{forest}
-#+LATEX_HEADER: \forestset{pad/.style={minimum width=5em}}
+#+LATEX_HEADER: \usepackage[russian,english]{babel}
+# #+LATEX_HEADER: \defaultfontfeatures{Path={/Users/xmarvl/.local/share/polytextum/fonts/}}
+#+LATEX_HEADER: \setmainfont{New York Medium}
+# #+LATEX_HEADER: \setmonofont[UprightFont=*-Thin, BoldFont=*-Reg,]{BaseMonoNarrowOT}
 
-=======
->>>>>>> 01bfb87874644b4d334af467411f903287b39f4b
+#+LATEX_HEADER: \forestset{pad/.style={minimum width=5em}}
 * Chapter 1
 ** Stats (1.4)
 *** POS 
@@ -451,18 +453,1348 @@ Values:
 | 44 | Voice=Pass    |
 * Chapter 3
 [[lab1.conllu]]
-<<<<<<< HEAD
 * Chapter 4
-~ 10 trees 
-- A small town with two minarets glides by.\\
+** 1 trees
+- [EN] A small town with two minarets glides by. [this was a vague attempt to use GF grammmar]\\
   \begin{forest}
   [S [NP [DET [the]]
          [CN  [CN [[AP [small]] [CN [town]]]]
               [AP [NP_{obl} [Prep [with]] [NP [Num [two]] [NP [minarets]]]]]]]
      [VP [[V [glides]] [ADV [by]]]]]
   \end{forest}
-- [NP [PRON He]] (V (VERB collected)) (NP (NOUN cards)) (CONJ and) (VP (VERB traded) (PRON them) [ADP with] (NP [DET the] [ADJ other] [NOUN boys])
-- ((Utt (QS (IP Who) (Cop are) (Comp (NP (Prop they)))) (Punct ?))
+- [RU] Маленький город с двумя минаретами проплывает мимо \\
+  \begin{forest}
+  [S [NP [NP [Adj [Маленький]] [Noun [город]]] [PP [Prep [с]] [NP [Num [двумя]] [Noun [минаретами]]]]] [VP [Verb [проплывает]] [Adv [мимо]]]]
+  \end{forest}
 
-=======
->>>>>>> 01bfb87874644b4d334af467411f903287b39f4b
+Examples from the lab:  
+- [NP [PRON He]] (V (VERB collected)) (NP (NOUN cards)) (CONJ and) (VP (VERB traded) (PRON them) [ADP with] (NP [DET the] [ADJ other] [NOUN boys])
+- 
+
+   ((Utt (QS (IP Who) (Cop are) (Comp (NP (Prop they)))) (Punct ?))
+** 2 test the grammar
+1. for English
+   #+BEGIN_SRC sh :results output code
+   cat lab1/data/lab1.en.txt | ./lab1/gfud dbnf lab1/Russian.dbnf Utt
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_src conllu
+
+   # text = Who:<PRON> are:<AUX> they:<PRON> ?:<PUNCT>
+   # analyses = 3
+   # parsetree = (Utt (Utt (S (there Who) (be_V are) (NP (Pron they)))) (Punct '?'))
+   1	Who	_	PRON	_	_	2	expl	_	_
+   2	are	_	VERB	_	_	0	root	_	_
+   3	they	_	PRON	_	_	2	nsubj	_	_
+   4	?	_	PUNCT	_	_	2	punct	_	_
+
+
+
+   # text = A:<DET> small:<ADJ> town:<NOUN> with:<ADP> two:<NUM> minarets:<NOUN> glides:<VERB> by:<ADV> .:<PUNCT>
+   # analyses = 22
+   # parsetree = (Utt (Utt (S (NP (NP (Det A) (CN (AP (A small)) (CN (N town)))) (NP_obl (Prep with) (NP (Num (Card two)) (NP (CN (N minarets)))))) (VP (VP (V glides)) (Adv by)))) (Punct '.'))
+   1	A	_	DET	_	_	3	det	_	_
+   2	small	_	ADJ	_	_	3	amod	_	_
+   3	town	_	NOUN	_	_	7	nsubj	_	_
+   4	with	_	ADP	_	_	6	case	_	_
+   5	two	_	NUM	_	_	6	nummod	_	_
+   6	minarets	_	NOUN	_	_	3	nmod	_	_
+   7	glides	_	VERB	_	_	0	root	_	_
+   8	by	_	ADV	_	_	7	advmod	_	_
+   9	.	_	PUNCT	_	_	7	punct	_	_
+
+
+
+   # text = I:<PRON> was:<AUX> just:<ADV> a:<DET> boy:<NOUN> with:<ADP> muddy:<ADJ> shoes:<NOUN> .:<PUNCT>
+   # analyses = 24
+   # parsetree = (Utt (Utt (S (there I) (be_V was) (AdV just) (NP (NP (Det a) (CN (N boy))) (NP_obl (Prep with) (NP (CN (AP (A muddy)) (CN (N shoes)))))))) (Punct '.'))
+   1	I	_	PRON	_	_	2	expl	_	_
+   2	was	_	VERB	_	_	0	root	_	_
+   3	just	_	ADV	_	_	2	advmod	_	_
+   4	a	_	DET	_	_	5	det	_	_
+   5	boy	_	NOUN	_	_	2	nsubj	_	_
+   6	with	_	ADP	_	_	8	case	_	_
+   7	muddy	_	ADJ	_	_	8	amod	_	_
+   8	shoes	_	NOUN	_	_	5	nmod	_	_
+   9	.	_	PUNCT	_	_	2	punct	_	_
+
+
+
+   # text = Shenzhen:<PROPN> 's:<PART> traffic:<NOUN> police:<NOUN> have:<AUX> opted:<VERB> for:<ADP> unconventional:<ADJ> penalties:<NOUN> before:<ADV> .:<PUNCT>.:<PUNCT>
+   # analyses = 17
+   # parsetree = (Utt (Utt (S (NP (NP_poss (NP (PN Shenzhen)) ('s' 's')) (CN (N (N_one traffic) (N police)))) (have have) (VP (VP (V2 opted) (NP_obl (Prep for) (NP (CN (AP (A unconventional)) (CN (N penalties)))))) (Adv before)))) (Punct '.:<PUNCT>.'))
+   1	Shenzhen	_	PROPN	_	_	4	nmod:poss	_	_
+   2	's	_	PART	_	_	1	case	_	_
+   3	traffic	_	NOUN	_	_	4	compound	_	_
+   4	police	_	NOUN	_	_	6	nsubj	_	_
+   5	have	_	AUX	_	_	6	aux	_	_
+   6	opted	_	VERB	_	_	0	root	_	_
+   7	for	_	ADP	_	_	9	case	_	_
+   8	unconventional	_	ADJ	_	_	9	amod	_	_
+   9	penalties	_	NOUN	_	_	6	obl	_	_
+   10	before	_	ADV	_	_	6	advmod	_	_
+   11	.:<PUNCT>.	_	PUNCT	_	_	6	punct	_	_
+
+
+
+   # text = The:<DET> study:<NOUN> of:<ADP> volcanoes:<NOUN> is:<AUX> called:<VERB> volcanology:<NOUN> ,:<PUNCT> sometimes:<ADV> spelled:<VERB> vulcanology:<NOUN> .:<PUNCT>
+   # analyses = 10
+   # parsetree = (Utt (Utt (S (SC (S_that (S (NP (NP (Det The) (CN (N study))) (NP_obl (Prep of) (NP (CN (N volcanoes))))) (have is) (VP (VP (V2 called) (NP (CN (N volcanology)))) (comma ',') (Adv sometimes))))) (VP (V2 spelled) (NP (CN (N vulcanology)))))) (Punct '.'))
+   1	The	_	DET	_	_	2	det	_	_
+   2	study	_	NOUN	_	_	6	nsubj	_	_
+   3	of	_	ADP	_	_	4	case	_	_
+   4	volcanoes	_	NOUN	_	_	2	nmod	_	_
+   5	is	_	AUX	_	_	6	aux	_	_
+   6	called	_	VERB	_	_	10	csubj	_	_
+   7	volcanology	_	NOUN	_	_	6	obj	_	_
+   8	,	_	PUNCT	_	_	6	punct	_	_
+   9	sometimes	_	ADV	_	_	6	advmod	_	_
+   10	spelled	_	VERB	_	_	0	root	_	_
+   11	vulcanology	_	NOUN	_	_	10	obj	_	_
+   12	.	_	PUNCT	_	_	10	punct	_	_
+
+
+
+   # text = It:<PRON> was:<AUX> conducted:<VERB> just:<ADV> off:<ADP> the:<DET> Mexican:<ADJ> coast:<NOUN> from:<ADP> April:<PROPN> to:<ADP> June:<PROPN> .:<PUNCT>
+   # analyses = 35
+   # parsetree = (Utt (Utt (QS (IP It) (cop was) (VP_pass (VP_pass (VP_pass (V2 conducted)) (Adv just)) (NP_obl (Prep off) (NP (NP (Det the) (CN (AP (A Mexican)) (CN (N coast)))) (NP_obl (Prep from) (NP (NP (PN April)) (NP_obl (Prep to) (NP (PN June)))))))))) (Punct '.'))
+   1	It	_	PRON	_	_	3	nsubj:pass	_	_
+   2	was	_	AUX	_	_	3	aux:pass	_	_
+   3	conducted	_	VERB	_	_	0	root	_	_
+   4	just	_	ADV	_	_	3	advmod	_	_
+   5	off	_	ADP	_	_	8	case	_	_
+   6	the	_	DET	_	_	8	det	_	_
+   7	Mexican	_	ADJ	_	_	8	amod	_	_
+   8	coast	_	NOUN	_	_	3	nmod	_	_
+   9	from	_	ADP	_	_	10	case	_	_
+   10	April	_	PROPN	_	_	8	nmod	_	_
+   11	to	_	ADP	_	_	12	case	_	_
+   12	June	_	PROPN	_	_	10	nmod	_	_
+   13	.	_	PUNCT	_	_	3	punct	_	_
+
+
+
+   # text = he collected cards and traded them with the other boys
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron he))) (Str collected) (Str cards) (Conj and) (Str traded) (Comp (NP (NP (Pron them)) (NP_obl (Prep with) (NP (Det the))))) (Str other) (Str boys))
+   1	he	_	PRON	_	_	10	dep	_	_
+   2	collected	_	X	_	_	10	dep	_	_
+   3	cards	_	X	_	_	10	dep	_	_
+   4	and	_	CCONJ	_	_	10	dep	_	_
+   5	traded	_	X	_	_	10	dep	_	_
+   6	them	_	PRON	_	_	10	dep	_	_
+   7	with	_	ADP	_	_	8	case	_	_
+   8	the	_	DET	_	_	6	nmod	_	_
+   9	other	_	X	_	_	10	dep	_	_
+   10	boys	_	X	_	_	0	root	_	_
+
+
+
+   # text = this crime carries a penalty of five years in prison
+   # analyses = 0
+   # parsetree = (Chunks (Str this) (Str crime) (Str carries) (Comp (NP (Det a))) (Str penalty) (Comp (NP_obl (Prep of) (NP (Num (Card five))))) (Str years) (Prep in) (Str prison))
+   1	this	_	X	_	_	10	dep	_	_
+   2	crime	_	X	_	_	10	dep	_	_
+   3	carries	_	X	_	_	10	dep	_	_
+   4	a	_	DET	_	_	10	dep	_	_
+   5	penalty	_	X	_	_	10	dep	_	_
+   6	of	_	ADP	_	_	7	case	_	_
+   7	five	_	NUM	_	_	10	dep	_	_
+   8	years	_	X	_	_	10	dep	_	_
+   9	in	_	ADP	_	_	10	dep	_	_
+   10	prison	_	X	_	_	0	root	_	_
+
+
+
+   # text = the news was carried to every village in the province
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Det the))) (Str news) (be_V was) (Str carried) (Comp (NP_obl (Prep to) (NP (Det every)))) (Str village) (Comp (NP_obl (Prep in) (NP (Det the)))) (Str province))
+   1	the	_	DET	_	_	10	dep	_	_
+   2	news	_	X	_	_	10	dep	_	_
+   3	was	_	VERB	_	_	10	dep	_	_
+   4	carried	_	X	_	_	10	dep	_	_
+   5	to	_	ADP	_	_	6	case	_	_
+   6	every	_	DET	_	_	10	dep	_	_
+   7	village	_	X	_	_	10	dep	_	_
+   8	in	_	ADP	_	_	9	case	_	_
+   9	the	_	DET	_	_	10	dep	_	_
+   10	province	_	X	_	_	0	root	_	_
+
+
+
+   # text = I carry these thoughts in the back of my head
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron I))) (Str carry) (Str these) (Str thoughts) (Comp (NP_obl (Prep in) (NP (Det the)))) (Str back) (Prep of) (NP_poss (Pron_poss my)) (Str head))
+   1	I	_	PRON	_	_	10	dep	_	_
+   2	carry	_	X	_	_	10	dep	_	_
+   3	these	_	X	_	_	10	dep	_	_
+   4	thoughts	_	X	_	_	10	dep	_	_
+   5	in	_	ADP	_	_	6	case	_	_
+   6	the	_	DET	_	_	10	dep	_	_
+   7	back	_	X	_	_	10	dep	_	_
+   8	of	_	ADP	_	_	10	dep	_	_
+   9	my	_	PRON	_	_	10	dep	_	_
+   10	head	_	X	_	_	0	root	_	_
+
+
+
+   # text = Adam would have been carried over into the life eternal
+   # analyses = 0
+   # parsetree = (Chunks (Str Adam) (Imp (VP (aux would))) (have have) (be_V been) (Str carried) (Str over) (Str into) (Comp (NP (Det the) (CN (N life)))) (Str eternal))
+   1	Adam	_	X	_	_	10	dep	_	_
+   2	would	_	AUX	_	_	10	dep	_	_
+   3	have	_	AUX	_	_	10	dep	_	_
+   4	been	_	VERB	_	_	10	dep	_	_
+   5	carried	_	X	_	_	10	dep	_	_
+   6	over	_	X	_	_	10	dep	_	_
+   7	into	_	X	_	_	10	dep	_	_
+   8	the	_	DET	_	_	9	det	_	_
+   9	life	_	NOUN	_	_	10	dep	_	_
+   10	eternal	_	X	_	_	0	root	_	_
+
+
+
+   # text = the casings had rotted away and had to be replaced
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Det the))) (Str casings) (have had) (Str rotted) (Str away) (Conj and) (have had) (Prep to) (be_V be) (Str replaced))
+   1	the	_	DET	_	_	10	dep	_	_
+   2	casings	_	X	_	_	10	dep	_	_
+   3	had	_	AUX	_	_	10	dep	_	_
+   4	rotted	_	X	_	_	10	dep	_	_
+   5	away	_	X	_	_	10	dep	_	_
+   6	and	_	CCONJ	_	_	10	dep	_	_
+   7	had	_	AUX	_	_	10	dep	_	_
+   8	to	_	ADP	_	_	10	dep	_	_
+   9	be	_	VERB	_	_	10	dep	_	_
+   10	replaced	_	X	_	_	0	root	_	_
+
+
+
+   # text = she was incensed that this chit of a girl should dare to make a fool of her in front of the class
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron she))) (be_V was) (Str incensed) (that that) (Str this) (Str chit) (Comp (NP_obl (Prep of) (NP (NP (Det a)) (SC (S_that (S (NP (CN (N girl))) (VP (aux should)))))))) (Str dare) (SC (VP_to (to to) (VP (V2 make) (NP (Det a))))) (Str fool) (Comp (NP_obl (Prep of) (NP (Pron her)))) (Prep in) (Str front) (Comp (NP_obl (Prep of) (NP (Det the)))) (Str class))
+   1	she	_	PRON	_	_	22	dep	_	_
+   2	was	_	VERB	_	_	22	dep	_	_
+   3	incensed	_	X	_	_	22	dep	_	_
+   4	that	_	SCONJ	_	_	22	dep	_	_
+   5	this	_	X	_	_	22	dep	_	_
+   6	chit	_	X	_	_	22	dep	_	_
+   7	of	_	ADP	_	_	8	case	_	_
+   8	a	_	DET	_	_	22	dep	_	_
+   9	girl	_	NOUN	_	_	10	nsubj	_	_
+   10	should	_	AUX	_	_	8	acl	_	_
+   11	dare	_	X	_	_	22	dep	_	_
+   12	to	_	PART	_	_	13	mark	_	_
+   13	make	_	VERB	_	_	22	dep	_	_
+   14	a	_	DET	_	_	13	obj	_	_
+   15	fool	_	X	_	_	22	dep	_	_
+   16	of	_	ADP	_	_	17	case	_	_
+   17	her	_	PRON	_	_	22	dep	_	_
+   18	in	_	ADP	_	_	22	dep	_	_
+   19	front	_	X	_	_	22	dep	_	_
+   20	of	_	ADP	_	_	21	case	_	_
+   21	the	_	DET	_	_	22	dep	_	_
+   22	class	_	X	_	_	0	root	_	_
+
+
+
+   #+end_src
+
+
+2. for Russian
+   #+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \usepackage[linguistics]{forest}
+#+LATEX_HEADER: \usepackage[russian,english]{babel}
+# #+LATEX_HEADER: \defaultfontfeatures{Path={/Users/xmarvl/.local/share/polytextum/fonts/}}
+#+LATEX_HEADER: \setmainfont{New York Medium}
+# #+LATEX_HEADER: \setmonofont[UprightFont=*-Thin, BoldFont=*-Reg,]{BaseMonoNarrowOT}
+
+#+LATEX_HEADER: \forestset{pad/.style={minimum width=5em}}
+* Chapter 1
+** Stats (1.4)
+*** POS 
+**** Japanese
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+| 6479 | ADP   |
+| 5982 | NOUN  |
+| 3739 | AUX   |
+| 2977 | PUNCT |
+| 2419 | VERB  |
+| 1408 | PROPN |
+| 1147 | SCONJ |
+|  723 | ADJ   |
+|  541 | NUM   |
+|  433 | PRON  |
+|  250 | ADV   |
+|  184 | SYM   |
+|  179 | DET   |
+|  130 | CCONJ |
+|  116 | PART  |
+
+
+**** English
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 4 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+| 4040 | NOUN  |
+| 2493 | ADP   |
+| 2451 | PUNCT |
+| 2156 | VERB  |
+| 2086 | DET   |
+| 1727 | PROPN |
+| 1540 | ADJ   |
+| 1021 | PRON  |
+| 1014 | AUX   |
+|  849 | ADV   |
+|  576 | CCONJ |
+|  455 | NUM   |
+|  426 | PART  |
+|  290 | SCONJ |
+|   42 | SYM   |
+|   16 | X     |
+|    1 | INTJ  |
+
+
+**** What does this tell about Japanese?
+1. Determiners are much more common in English, in Japanese only
+   demonstrative pronouns (that) fall into the category, as there are
+   no definite and indefinite articles.
+2. Pronouns are less frequent in Japanese, because they are commonly omitted. 
+3. Adpositions are more frequent in Japanese: for example, topic markers such as は (’as for me’) are very common and denoted as ADP.
+
+   
+*** Dependencies 
+**** Japanese
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_Japanese-PUD/ja_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+| 6375 | case       |
+| 3399 | aux        |
+| 2977 | punct      |
+| 2320 | nmod       |
+| 1477 | compound   |
+| 1366 | nsubj      |
+| 1216 | mark       |
+| 1124 | advcl      |
+| 1087 | obl        |
+| 1000 | root       |
+|  929 | acl        |
+|  798 | obj        |
+|  713 | iobj       |
+|  529 | nummod     |
+|  370 | advmod     |
+|  291 | cop        |
+|  179 | det        |
+|  127 | amod       |
+|   96 | fixed      |
+|   95 | csubj      |
+|   75 | cc         |
+|   68 | ccomp      |
+|   50 | appos      |
+|   45 | dislocated |
+|    1 | dep        |
+
+
+**** English
+#+BEGIN_SRC sh
+  cat ud-treebanks-v2.5/UD_English-PUD/en_pud-ud-test.conllu | grep -v '#' | grep . | cut -d$'\t' -f 8 | sort | uniq -c | sort -n -r
+#+END_SRC
+
+| 2499 | case         |
+| 2451 | punct        |
+| 2047 | det          |
+| 1393 | nsubj        |
+| 1336 | amod         |
+| 1237 | obl          |
+| 1076 | nmod         |
+| 1000 | root         |
+|  876 | obj          |
+|  852 | advmod       |
+|  810 | compound     |
+|  634 | conj         |
+|  574 | cc           |
+|  555 | mark         |
+|  410 | aux          |
+|  365 | nmod:poss    |
+|  316 | cop          |
+|  293 | advcl        |
+|  274 | aux:pass     |
+|  271 | xcomp        |
+|  254 | nummod       |
+|  239 | nsubj:pass   |
+|  230 | flat         |
+|  211 | acl:relcl    |
+|  193 | acl          |
+|  143 | appos        |
+|  135 | ccomp        |
+|  103 | fixed        |
+|   97 | parataxis    |
+|   70 | compound:prt |
+|   62 | expl         |
+|   39 | nmod:tmod    |
+|   27 | csubj        |
+|   20 | obl:npmod    |
+|   19 | nmod:npmod   |
+|   18 | obl:tmod     |
+|   11 | cc:preconj   |
+|   10 | iobj         |
+|    9 | det:predet   |
+|    7 | orphan       |
+|    7 | _            |
+|    3 | csubj:pass   |
+|    2 | dislocated   |
+|    1 | vocative     |
+|    1 | reparandum   |
+|    1 | goeswith     |
+|    1 | discourse    |
+|    1 | dep          |
+
+
+**** What does this tell about Japanese?
+1. ~aux~ dependency is much more common in Japanese, because auxiliary verbs are also more common. For example, verb auxiliaries in Japanese are used for marking politeness and continuation. There are also auxiliaries that are attached to nouns (see below).
+2. ~amod~ is much more common in English, whether ~acl~ is more common in Japanese. Relative clauses are very common in Japanese, probably due to formal nouns, such as もの and こと (‘thing’, ‘fact’  etc.) which commonly have clausal complement (to express nouns like "running" as "fact that someone runs").
+
+   
+** Trees
+[[./img/jp-trees.png]]
+
+
+*** He then spent four years with BBC World Service radio at Bush House.
+#+BEGIN_EXAMPLE
+# newdoc id = n01072
+# sent_id = n01072010
+# text = He then spent four years with BBC World Service radio at Bush House.
+1       He      he      PRON    PRP     Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs  3       nsubj   3:nsubj _
+2       then    then    ADV     RB      PronType=Dem    3       advmod  3:advmod        _
+3       spent   spend   VERB    VBD     Mood=Ind|Tense=Past|VerbForm=Fin        0       root    0:root  _
+4       four    four    NUM     CD      NumType=Card    5       nummod  5:nummod        _
+5       years   year    NOUN    NNS     Number=Plur     3       nmod:tmod       3:nmod:tmod     _
+6       with    with    ADP     IN      _       10      case    10:case _
+7       BBC     BBC     PROPN   NNP     Number=Sing     9       compound        9:compound      _
+8       World   world   NOUN    NN      Number=Sing     9       compound        9:compound      _
+9       Service service NOUN    NN      Number=Sing     10      compound        10:compound     _
+10      radio   radio   NOUN    NN      Number=Sing     3       obl     3:obl:with      _
+11      at      at      ADP     IN      _       13      case    13:case _
+12      Bush    Bush    PROPN   NNP     Number=Sing     13      compound        13:compound     _
+13      House   house   PROPN   NN      Number=Sing     3       obl     3:obl:at        SpaceAfter=No
+14      .       .       PUNCT   .       _       3       punct   3:punct _
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+# sent_id = n01072010
+# text = その後、ブッシュハウスで4年をBBCワールドサービスラジオとともに過ごした。
+# text_en = He then spent four years with BBC World Service radio at Bush House.
+1       その後  その後  NOUN    NR      _       13      obl     _       SpaceAfter=No
+2       、      、      PUNCT   SYM     _       1       punct   _       SpaceAfter=No
+3       ブッシュハウス  ブッシュハウス  PROPN   NNP     _       13      obl     _       SpaceAfter=No
+4       で      で      ADP     PS      _       3       case    _       SpaceAfter=No
+5       4       4       NUM     CD      NumType=Card    6       nummod  _       SpaceAfter=No
+6       年      年      NOUN    XSC     _       13      obj     _       SpaceAfter=No
+7       を      を      ADP     PS      _       6       case    _       SpaceAfter=No
+8       BBC     BBC     PROPN   NNP     _       11      compound        _       SpaceAfter=No
+9       ワールド        ワールド        NOUN    NN      _       11      compound        _       SpaceAfter=No
+10      サービス        サービス        NOUN    NN      _       11      compound        _       SpaceAfter=No
+11      ラジオ  ラジオ  NOUN    NN      _       13      obl     _       SpaceAfter=No
+12      とともに        とともに        ADP     PP      _       11      case    _       SpaceAfter=No
+13      過ごし  過ごす  VERB    VV      _       0       root    _       SpaceAfter=No
+14      た      た      AUX     AV      _       13      aux     _       SpaceAfter=No
+15      。      。      PUNCT   SYM     _       13      punct   _       SpaceAfter=No
+#+END_EXAMPLE
+*** I also struggle with passwords.
+#+BEGIN_EXAMPLE
+# sent_id = n01077018
+# text = I also struggle with passwords.
+1       I       I       PRON    PRP     Case=Nom|Number=Sing|Person=1|PronType=Prs      3       nsubj   3:nsubj _
+2       also    also    ADV     RB      _       3       advmod  3:advmod        _
+3       struggle        struggle        VERB    VBP     Mood=Ind|Tense=Pres|VerbForm=Fin        0       root    0:root  _
+4       with    with    ADP     IN      _       5       case    5:case  _
+5       passwords       password        NOUN    NNS     Number=Plur     3       obl     3:obl:with      SpaceAfter=No
+6       .       .       PUNCT   .       _       3       punct   3:punct _
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+# sent_id = n01077018
+# text = 私はパスワードにも苦労している。
+# text_en = I also struggle with passwords.
+1       私      私      PRON    NP      _       6       nsubj   _       SpaceAfter=No
+2       は      は      ADP     PK      _       1       case    _       SpaceAfter=No
+3       パスワード      パスワード      NOUN    NN      _       6       iobj    _  SpaceAfter=No
+4       に      に      ADP     PS      _       3       case    _       SpaceAfter=No
+5       も      も      ADP     PK      _       3       case    _       SpaceAfter=No
+6       苦労    苦労    VERB    VV      _       0       root    _       SpaceAfter=No
+7       し      する    AUX     XV      _       6       aux     _       SpaceAfter=No
+8       て      て      SCONJ   PC      _       6       mark    _       SpaceAfter=No
+9       いる    いる    AUX     AV      _       6       aux     _       SpaceAfter=No
+10      。      。      PUNCT   SYM     _       6       punct   _       SpaceAfter=No
+#+END_EXAMPLE
+
+** alignment
+#+BEGIN_EXAMPLE
+1       He         _
+2       then       1       その後     (note: NOUN vs ADV)
+                   2       、
+3       spent      13      過ごし
+_       _          14      た
+4       four       5       4
+5       years      6       年
+_       _          7       を
+6       with       12      とともに
+7       BBC        8       BBC
+8       World      9       ワールド
+9       Service    10      サービス 
+10      radio      11      ラジオ  
+11      at         4       で
+12      Bush       3       ブッシュハウス
+13      House      3       ブッシュハウス
+14      .          15      。                    
+#+END_EXAMPLE
+
+* Chapter 2
+** Morphological types
+*** Nouns:
+- inherent features
+  - gender (feminine, masculine, neuter, +common)
+  - animacy (animate, inanimate)
+- inflectional features
+  - case (nominative, accusative, genetive, dative, instrumental, prepositional, + additional cases (locative, partitive, vocative, countable form))
+  - number (singular, plural)
+  - diminutives/augmentatives
+
+| feature | typical values                 | examples                                                           |
+|---------+--------------------------------+--------------------------------------------------------------------|
+| gender  | f, m, n, common                | скала (rock), порох (gunpowder), окно (window), пьяница (drunkard) |
+| case    | nom, acc, gen, dat, inst, prep | скала, скалу, скалы, скале, скалой, скале                          |
+| number  | sg, pl                         | скала, скалы                                                       |
+| animacy | an, inan                       | собака (dog), скала                                                |
+| dim/aug | dim, aug                       | зверёк (a small beast), зверина (a massive beast)                  |
+
+
+
+*** Adjectives:
+- inherent features
+  - groups (qualitative, relational, posessive)
+- agreement
+  - gender, number, case
+- inflectional features
+  - case (basic cases for nouns + short form for nominative)
+  - degree (positive, comparative, superlative)
+
+| feature | typical values                       | examples                                              |
+|---------+--------------------------------------+-------------------------------------------------------|
+| group   | qual, rel, pos                       | большой (big), больший (bigger), Петин (Pete’s)       |
+| case    | nom, acc, gen, dat, inst, prep, shrt | новый (new), новый, нового, новому, новым, новый, нов |
+| degree  | pos, cmp, sup                        | новый, новее, новейший                                |
+
+
+*** Verbs
+- inherent features
+  - 
+- inflectional features:
+  - person (1, 2, 3)
+  - number (singular, plural)
+  - tense (present/future, past) ??
+  - aspect (imperfective, perfective)
+  - reflexive (-, +)
+  - voice (active, passive)
+  - mood (indicative, imperative, conditional, subjunctive)
+
+| feature   | typical values       | examples                    |
+|-----------+----------------------+-----------------------------|
+| aspect    | imperf, perf         | писать (to write), написать |
+| reflexive | -, +                 | мыть, мыться                |
+| voice     | active, passive      | ловил, ловился              |
+| mood      | ind, imp, cond, subj | ...                         |
+
+** PUD types
+*** Nouns
+#+NAME: noun
+#+BEGIN_SRC sh :results value :exports both
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+Features:
+#+RESULTS: noun
+| 11 | Abbr=    |
+| 76 | Animacy= |
+| 76 | Case=    |
+|  1 | Foreign= |
+| 76 | Gender=  |
+| 76 | Number=  |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=noun :exports both
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep NOUN | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+| 11 | Abbr=Yes     |
+| 33 | Animacy=Anim |
+| 43 | Animacy=Inan |
+| 12 | Case=Acc     |
+| 11 | Case=Dat     |
+| 17 | Case=Gen     |
+| 11 | Case=Ins     |
+| 11 | Case=Loc     |
+| 14 | Case=Nom     |
+|  1 | Foreign=Yes  |
+| 26 | Gender=Fem   |
+| 31 | Gender=Masc  |
+| 19 | Gender=Neut  |
+| 36 | Number=Plur  |
+| 40 | Number=Sing  |
+*** Adjectives
+Features:
+#+NAME: adj
+#+BEGIN_SRC sh :results value :exports both
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+#+RESULTS: adj
+|  5 | Animacy= |
+| 32 | Case=    |
+| 38 | Degree=  |
+| 28 | Gender=  |
+| 37 | Number=  |
+|  4 | Variant= |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=adj :exports both
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep ADJ | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+|  2 | Animacy=Anim  |
+|  3 | Animacy=Inan  |
+|  8 | Case=Acc      |
+|  4 | Case=Dat      |
+|  6 | Case=Gen      |
+|  6 | Case=Ins      |
+|  4 | Case=Loc      |
+|  4 | Case=Nom      |
+|  1 | Degree=Cmp    |
+| 32 | Degree=Pos    |
+|  5 | Degree=Sup    |
+|  7 | Gender=Fem    |
+| 11 | Gender=Masc   |
+| 10 | Gender=Neut   |
+| 10 | Number=Plur   |
+| 27 | Number=Sing   |
+|  4 | Variant=Short |
+*** Verbs
+Features:
+#+NAME: verb
+#+BEGIN_SRC sh :results value :exports both
+cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o '\w\+=' | sort | uniq -c
+#+END_SRC
+
+#+RESULTS: verb
+|   1 | Abbr=     |
+|  15 | Animacy=  |
+| 146 | Aspect=   |
+|  87 | Case=     |
+|   1 | Degree=   |
+|  76 | Gender=   |
+|  45 | Mood=     |
+| 137 | Number=   |
+|  25 | Person=   |
+| 140 | Tense=    |
+|   5 | Variant=  |
+| 146 | VerbForm= |
+| 146 | Voice=    |
+
+Values:
+#+BEGIN_SRC sh :results value :var feat=verb :exports both
+  for i in $feat
+  do
+      cat ud-treebanks-v2.5/UD_Russian-PUD/ru_pud-ud-test.conllu | grep -v '#' | grep VERB | cut -d$'\t' -f 6 | sort | uniq | grep -o "$i\w\+" | sort | uniq -c
+  done
+#+END_SRC
+
+#+RESULTS:
+|  1 | Abbr=Yes      |
+|  5 | Animacy=Anim  |
+| 10 | Animacy=Inan  |
+| 83 | Aspect=Imp    |
+| 63 | Aspect=Perf   |
+| 21 | Case=Acc      |
+|  8 | Case=Dat      |
+| 19 | Case=Gen      |
+| 12 | Case=Ins      |
+|  9 | Case=Loc      |
+| 18 | Case=Nom      |
+|  1 | Degree=Pos    |
+| 23 | Gender=Fem    |
+| 31 | Gender=Masc   |
+| 22 | Gender=Neut   |
+|  1 | Mood=Imp      |
+| 44 | Mood=Ind      |
+| 49 | Number=Plur   |
+| 88 | Number=Sing   |
+|  7 | Person=1      |
+|  7 | Person=2      |
+| 11 | Person=3      |
+|  9 | Tense=Fut     |
+| 70 | Tense=Past    |
+| 61 | Tense=Pres    |
+|  5 | Variant=Short |
+|  4 | VerbForm=Conv |
+| 45 | VerbForm=Fin  |
+|  5 | VerbForm=Inf  |
+| 92 | VerbForm=Part |
+| 61 | Voice=Act     |
+| 41 | Voice=Mid     |
+| 44 | Voice=Pass    |
+* Chapter 3
+[[lab1.conllu]]
+* Chapter 4
+** 1 trees
+- [EN] A small town with two minarets glides by. [this was a vague attempt to use GF grammmar]\\
+  \begin{forest}
+  [S [NP [DET [the]]
+         [CN  [CN [[AP [small]] [CN [town]]]]
+              [AP [NP_{obl} [Prep [with]] [NP [Num [two]] [NP [minarets]]]]]]]
+     [VP [[V [glides]] [ADV [by]]]]]
+  \end{forest}
+- [RU] Маленький город с двумя минаретами проплывает мимо \\
+  \begin{forest}
+  [S [NP [NP [Adj [Маленький]] [Noun [город]]] [PP [Prep [с]] [NP [Num [двумя]] [Noun [минаретами]]]]] [VP [Verb [проплывает]] [Adv [мимо]]]]
+  \end{forest}
+
+Examples from the lab:  
+- [NP [PRON He]] (V (VERB collected)) (NP (NOUN cards)) (CONJ and) (VP (VERB traded) (PRON them) [ADP with] (NP [DET the] [ADJ other] [NOUN boys])
+- 
+
+   ((Utt (QS (IP Who) (Cop are) (Comp (NP (Prop they)))) (Punct ?))
+** 2 test the grammar
+1. for English
+   #+BEGIN_SRC sh :results output code
+   cat lab1/data/lab1.en.txt | ./lab1/gfud dbnf lab1/English.dbnf Utt
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_src sh
+
+   # text = Who:<PRON> are:<AUX> they:<PRON> ?:<PUNCT>
+   # analyses = 3
+   # parsetree = (Utt (Utt (S (there Who) (be_V are) (NP (Pron they)))) (Punct '?'))
+   1	Who	_	PRON	_	_	2	expl	_	_
+   2	are	_	VERB	_	_	0	root	_	_
+   3	they	_	PRON	_	_	2	nsubj	_	_
+   4	?	_	PUNCT	_	_	2	punct	_	_
+
+
+
+   # text = A:<DET> small:<ADJ> town:<NOUN> with:<ADP> two:<NUM> minarets:<NOUN> glides:<VERB> by:<ADV> .:<PUNCT>
+   # analyses = 22
+   # parsetree = (Utt (Utt (S (NP (NP (Det A) (CN (AP (A small)) (CN (N town)))) (NP_obl (Prep with) (NP (Num (Card two)) (NP (CN (N minarets)))))) (VP (VP (V glides)) (Adv by)))) (Punct '.'))
+   1	A	_	DET	_	_	3	det	_	_
+   2	small	_	ADJ	_	_	3	amod	_	_
+   3	town	_	NOUN	_	_	7	nsubj	_	_
+   4	with	_	ADP	_	_	6	case	_	_
+   5	two	_	NUM	_	_	6	nummod	_	_
+   6	minarets	_	NOUN	_	_	3	nmod	_	_
+   7	glides	_	VERB	_	_	0	root	_	_
+   8	by	_	ADV	_	_	7	advmod	_	_
+   9	.	_	PUNCT	_	_	7	punct	_	_
+
+
+
+   # text = I:<PRON> was:<AUX> just:<ADV> a:<DET> boy:<NOUN> with:<ADP> muddy:<ADJ> shoes:<NOUN> .:<PUNCT>
+   # analyses = 24
+   # parsetree = (Utt (Utt (S (there I) (be_V was) (AdV just) (NP (NP (Det a) (CN (N boy))) (NP_obl (Prep with) (NP (CN (AP (A muddy)) (CN (N shoes)))))))) (Punct '.'))
+   1	I	_	PRON	_	_	2	expl	_	_
+   2	was	_	VERB	_	_	0	root	_	_
+   3	just	_	ADV	_	_	2	advmod	_	_
+   4	a	_	DET	_	_	5	det	_	_
+   5	boy	_	NOUN	_	_	2	nsubj	_	_
+   6	with	_	ADP	_	_	8	case	_	_
+   7	muddy	_	ADJ	_	_	8	amod	_	_
+   8	shoes	_	NOUN	_	_	5	nmod	_	_
+   9	.	_	PUNCT	_	_	2	punct	_	_
+
+
+
+   # text = Shenzhen:<PROPN> 's:<PART> traffic:<NOUN> police:<NOUN> have:<AUX> opted:<VERB> for:<ADP> unconventional:<ADJ> penalties:<NOUN> before:<ADV> .:<PUNCT>.:<PUNCT>
+   # analyses = 17
+   # parsetree = (Utt (Utt (S (NP (NP_poss (NP (PN Shenzhen)) ('s' 's')) (CN (N (N_one traffic) (N police)))) (have have) (VP (VP (V2 opted) (NP_obl (Prep for) (NP (CN (AP (A unconventional)) (CN (N penalties)))))) (Adv before)))) (Punct '.:<PUNCT>.'))
+   1	Shenzhen	_	PROPN	_	_	4	nmod:poss	_	_
+   2	's	_	PART	_	_	1	case	_	_
+   3	traffic	_	NOUN	_	_	4	compound	_	_
+   4	police	_	NOUN	_	_	6	nsubj	_	_
+   5	have	_	AUX	_	_	6	aux	_	_
+   6	opted	_	VERB	_	_	0	root	_	_
+   7	for	_	ADP	_	_	9	case	_	_
+   8	unconventional	_	ADJ	_	_	9	amod	_	_
+   9	penalties	_	NOUN	_	_	6	obl	_	_
+   10	before	_	ADV	_	_	6	advmod	_	_
+   11	.:<PUNCT>.	_	PUNCT	_	_	6	punct	_	_
+
+
+
+   # text = The:<DET> study:<NOUN> of:<ADP> volcanoes:<NOUN> is:<AUX> called:<VERB> volcanology:<NOUN> ,:<PUNCT> sometimes:<ADV> spelled:<VERB> vulcanology:<NOUN> .:<PUNCT>
+   # analyses = 10
+   # parsetree = (Utt (Utt (S (SC (S_that (S (NP (NP (Det The) (CN (N study))) (NP_obl (Prep of) (NP (CN (N volcanoes))))) (have is) (VP (VP (V2 called) (NP (CN (N volcanology)))) (comma ',') (Adv sometimes))))) (VP (V2 spelled) (NP (CN (N vulcanology)))))) (Punct '.'))
+   1	The	_	DET	_	_	2	det	_	_
+   2	study	_	NOUN	_	_	6	nsubj	_	_
+   3	of	_	ADP	_	_	4	case	_	_
+   4	volcanoes	_	NOUN	_	_	2	nmod	_	_
+   5	is	_	AUX	_	_	6	aux	_	_
+   6	called	_	VERB	_	_	10	csubj	_	_
+   7	volcanology	_	NOUN	_	_	6	obj	_	_
+   8	,	_	PUNCT	_	_	6	punct	_	_
+   9	sometimes	_	ADV	_	_	6	advmod	_	_
+   10	spelled	_	VERB	_	_	0	root	_	_
+   11	vulcanology	_	NOUN	_	_	10	obj	_	_
+   12	.	_	PUNCT	_	_	10	punct	_	_
+
+
+
+   # text = It:<PRON> was:<AUX> conducted:<VERB> just:<ADV> off:<ADP> the:<DET> Mexican:<ADJ> coast:<NOUN> from:<ADP> April:<PROPN> to:<ADP> June:<PROPN> .:<PUNCT>
+   # analyses = 35
+   # parsetree = (Utt (Utt (QS (IP It) (cop was) (VP_pass (VP_pass (VP_pass (V2 conducted)) (Adv just)) (NP_obl (Prep off) (NP (NP (Det the) (CN (AP (A Mexican)) (CN (N coast)))) (NP_obl (Prep from) (NP (NP (PN April)) (NP_obl (Prep to) (NP (PN June)))))))))) (Punct '.'))
+   1	It	_	PRON	_	_	3	nsubj:pass	_	_
+   2	was	_	AUX	_	_	3	aux:pass	_	_
+   3	conducted	_	VERB	_	_	0	root	_	_
+   4	just	_	ADV	_	_	3	advmod	_	_
+   5	off	_	ADP	_	_	8	case	_	_
+   6	the	_	DET	_	_	8	det	_	_
+   7	Mexican	_	ADJ	_	_	8	amod	_	_
+   8	coast	_	NOUN	_	_	3	nmod	_	_
+   9	from	_	ADP	_	_	10	case	_	_
+   10	April	_	PROPN	_	_	8	nmod	_	_
+   11	to	_	ADP	_	_	12	case	_	_
+   12	June	_	PROPN	_	_	10	nmod	_	_
+   13	.	_	PUNCT	_	_	3	punct	_	_
+
+
+
+   # text = he collected cards and traded them with the other boys
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron he))) (Str collected) (Str cards) (Conj and) (Str traded) (Comp (NP (NP (Pron them)) (NP_obl (Prep with) (NP (Det the))))) (Str other) (Str boys))
+   1	he	_	PRON	_	_	10	dep	_	_
+   2	collected	_	X	_	_	10	dep	_	_
+   3	cards	_	X	_	_	10	dep	_	_
+   4	and	_	CCONJ	_	_	10	dep	_	_
+   5	traded	_	X	_	_	10	dep	_	_
+   6	them	_	PRON	_	_	10	dep	_	_
+   7	with	_	ADP	_	_	8	case	_	_
+   8	the	_	DET	_	_	6	nmod	_	_
+   9	other	_	X	_	_	10	dep	_	_
+   10	boys	_	X	_	_	0	root	_	_
+
+
+
+   # text = this crime carries a penalty of five years in prison
+   # analyses = 0
+   # parsetree = (Chunks (Str this) (Str crime) (Str carries) (Comp (NP (Det a))) (Str penalty) (Comp (NP_obl (Prep of) (NP (Num (Card five))))) (Str years) (Prep in) (Str prison))
+   1	this	_	X	_	_	10	dep	_	_
+   2	crime	_	X	_	_	10	dep	_	_
+   3	carries	_	X	_	_	10	dep	_	_
+   4	a	_	DET	_	_	10	dep	_	_
+   5	penalty	_	X	_	_	10	dep	_	_
+   6	of	_	ADP	_	_	7	case	_	_
+   7	five	_	NUM	_	_	10	dep	_	_
+   8	years	_	X	_	_	10	dep	_	_
+   9	in	_	ADP	_	_	10	dep	_	_
+   10	prison	_	X	_	_	0	root	_	_
+
+
+
+   # text = the news was carried to every village in the province
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Det the))) (Str news) (be_V was) (Str carried) (Comp (NP_obl (Prep to) (NP (Det every)))) (Str village) (Comp (NP_obl (Prep in) (NP (Det the)))) (Str province))
+   1	the	_	DET	_	_	10	dep	_	_
+   2	news	_	X	_	_	10	dep	_	_
+   3	was	_	VERB	_	_	10	dep	_	_
+   4	carried	_	X	_	_	10	dep	_	_
+   5	to	_	ADP	_	_	6	case	_	_
+   6	every	_	DET	_	_	10	dep	_	_
+   7	village	_	X	_	_	10	dep	_	_
+   8	in	_	ADP	_	_	9	case	_	_
+   9	the	_	DET	_	_	10	dep	_	_
+   10	province	_	X	_	_	0	root	_	_
+
+
+
+   # text = I carry these thoughts in the back of my head
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron I))) (Str carry) (Str these) (Str thoughts) (Comp (NP_obl (Prep in) (NP (Det the)))) (Str back) (Prep of) (NP_poss (Pron_poss my)) (Str head))
+   1	I	_	PRON	_	_	10	dep	_	_
+   2	carry	_	X	_	_	10	dep	_	_
+   3	these	_	X	_	_	10	dep	_	_
+   4	thoughts	_	X	_	_	10	dep	_	_
+   5	in	_	ADP	_	_	6	case	_	_
+   6	the	_	DET	_	_	10	dep	_	_
+   7	back	_	X	_	_	10	dep	_	_
+   8	of	_	ADP	_	_	10	dep	_	_
+   9	my	_	PRON	_	_	10	dep	_	_
+   10	head	_	X	_	_	0	root	_	_
+
+
+
+   # text = Adam would have been carried over into the life eternal
+   # analyses = 0
+   # parsetree = (Chunks (Str Adam) (Imp (VP (aux would))) (have have) (be_V been) (Str carried) (Str over) (Str into) (Comp (NP (Det the) (CN (N life)))) (Str eternal))
+   1	Adam	_	X	_	_	10	dep	_	_
+   2	would	_	AUX	_	_	10	dep	_	_
+   3	have	_	AUX	_	_	10	dep	_	_
+   4	been	_	VERB	_	_	10	dep	_	_
+   5	carried	_	X	_	_	10	dep	_	_
+   6	over	_	X	_	_	10	dep	_	_
+   7	into	_	X	_	_	10	dep	_	_
+   8	the	_	DET	_	_	9	det	_	_
+   9	life	_	NOUN	_	_	10	dep	_	_
+   10	eternal	_	X	_	_	0	root	_	_
+
+
+
+   # text = the casings had rotted away and had to be replaced
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Det the))) (Str casings) (have had) (Str rotted) (Str away) (Conj and) (have had) (Prep to) (be_V be) (Str replaced))
+   1	the	_	DET	_	_	10	dep	_	_
+   2	casings	_	X	_	_	10	dep	_	_
+   3	had	_	AUX	_	_	10	dep	_	_
+   4	rotted	_	X	_	_	10	dep	_	_
+   5	away	_	X	_	_	10	dep	_	_
+   6	and	_	CCONJ	_	_	10	dep	_	_
+   7	had	_	AUX	_	_	10	dep	_	_
+   8	to	_	ADP	_	_	10	dep	_	_
+   9	be	_	VERB	_	_	10	dep	_	_
+   10	replaced	_	X	_	_	0	root	_	_
+
+
+
+   # text = she was incensed that this chit of a girl should dare to make a fool of her in front of the class
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron she))) (be_V was) (Str incensed) (that that) (Str this) (Str chit) (Comp (NP_obl (Prep of) (NP (NP (Det a)) (SC (S_that (S (NP (CN (N girl))) (VP (aux should)))))))) (Str dare) (SC (VP_to (to to) (VP (V2 make) (NP (Det a))))) (Str fool) (Comp (NP_obl (Prep of) (NP (Pron her)))) (Prep in) (Str front) (Comp (NP_obl (Prep of) (NP (Det the)))) (Str class))
+   1	she	_	PRON	_	_	22	dep	_	_
+   2	was	_	VERB	_	_	22	dep	_	_
+   3	incensed	_	X	_	_	22	dep	_	_
+   4	that	_	SCONJ	_	_	22	dep	_	_
+   5	this	_	X	_	_	22	dep	_	_
+   6	chit	_	X	_	_	22	dep	_	_
+   7	of	_	ADP	_	_	8	case	_	_
+   8	a	_	DET	_	_	22	dep	_	_
+   9	girl	_	NOUN	_	_	10	nsubj	_	_
+   10	should	_	AUX	_	_	8	acl	_	_
+   11	dare	_	X	_	_	22	dep	_	_
+   12	to	_	PART	_	_	13	mark	_	_
+   13	make	_	VERB	_	_	22	dep	_	_
+   14	a	_	DET	_	_	13	obj	_	_
+   15	fool	_	X	_	_	22	dep	_	_
+   16	of	_	ADP	_	_	17	case	_	_
+   17	her	_	PRON	_	_	22	dep	_	_
+   18	in	_	ADP	_	_	22	dep	_	_
+   19	front	_	X	_	_	22	dep	_	_
+   20	of	_	ADP	_	_	21	case	_	_
+   21	the	_	DET	_	_	22	dep	_	_
+   22	class	_	X	_	_	0	root	_	_
+
+
+
+   #+end_src
+
+2. for Russian
+   #+BEGIN_SRC sh :results output code
+   cat lab1/data/lab1.ru.txt | ./lab1/gfud dbnf lab1/English.dbnf Utt
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_src sh
+
+   # text = Кто:<PRON> они:<PRON> ?:<PUNCT>
+   # analyses = 0
+   # parsetree = (Chunks (Comp (NP (Pron Кто))) (Utt (Utt (NP (Pron они))) (Punct '?')))
+   1	Кто	_	PRON	_	_	2	dep	_	_
+   2	они	_	PRON	_	_	0	root	_	_
+   3	?	_	PUNCT	_	_	2	punct	_	_
+
+
+
+   # text = маленький:<ADJ> город:<NOUN> с:<ADP> двумя:<NUM> минаретами:<NOUN> проплывает:<VERB> мимо:<ADV> .:<PUNCT>
+   # analyses = 18
+   # parsetree = (Utt (Utt (S (NP (NP (CN (AP (A маленький)) (CN (N город)))) (NP_obl (Prep с) (NP (Num (Card двумя)) (NP (CN (N минаретами)))))) (VP (VP (V проплывает)) (Adv мимо)))) (Punct '.'))
+   1	маленький	_	ADJ	_	_	2	amod	_	_
+   2	город	_	NOUN	_	_	6	nsubj	_	_
+   3	с	_	ADP	_	_	5	case	_	_
+   4	двумя	_	NUM	_	_	5	nummod	_	_
+   5	минаретами	_	NOUN	_	_	2	nmod	_	_
+   6	проплывает	_	VERB	_	_	0	root	_	_
+   7	мимо	_	ADV	_	_	6	advmod	_	_
+   8	.	_	PUNCT	_	_	6	punct	_	_
+
+
+
+   # text = Я:<PRON> был:<AUX> лишь:<ADV> мальчиком:<NOUN> в:<ADP> грязных:<ADJ> ботинках:<NOUN> .:<PUNCT>
+   # analyses = 14
+   # parsetree = (Utt (Utt (QS (IP Я) (cop был) (neg лишь) (Comp (NP (NP (CN (N мальчиком))) (NP_obl (Prep в) (NP (CN (AP (A грязных)) (CN (N ботинках))))))))) (Punct '.'))
+   1	Я	_	PRON	_	_	4	nsubj	_	_
+   2	был	_	AUX	_	_	4	cop	_	_
+   3	лишь	_	ADV	_	_	4	advmod	_	_
+   4	мальчиком	_	NOUN	_	_	0	root	_	_
+   5	в	_	ADP	_	_	7	case	_	_
+   6	грязных	_	ADJ	_	_	7	amod	_	_
+   7	ботинках	_	NOUN	_	_	4	nmod	_	_
+   8	.	_	PUNCT	_	_	4	punct	_	_
+
+
+
+   # text = Шеньженьская:<ADJ> дорожная:<ADJ> полиция:<NOUN> и:<CCONJ> ранее:<ADV> предпочитала:<VERB> нетрадиционные:<ADJ> взыскания:<NOUN> .:<PUNCT>
+   # analyses = 0
+   # parsetree = (Chunks (CN (AP (A Шеньженьская)) (CN (AP (A дорожная)) (CN (N полиция)))) (Utt (Utt (Conj и) (Utt (Imp (neg ранее) (VP (V2 предпочитала) (NP (CN (AP (A нетрадиционные)) (CN (N взыскания)))))))) (Punct '.')))
+   1	Шеньженьская	_	ADJ	_	_	3	amod	_	_
+   2	дорожная	_	ADJ	_	_	3	amod	_	_
+   3	полиция	_	NOUN	_	_	6	dep	_	_
+   4	и	_	CCONJ	_	_	6	cc	_	_
+   5	ранее	_	ADV	_	_	6	advmod	_	_
+   6	предпочитала	_	VERB	_	_	0	root	_	_
+   7	нетрадиционные	_	ADJ	_	_	8	amod	_	_
+   8	взыскания	_	NOUN	_	_	6	obj	_	_
+   9	.	_	PUNCT	_	_	6	punct	_	_
+
+
+
+   # text = Изучением вулканов занимается вулканология.
+   # analyses = 0
+   # parsetree = (Chunks (Str Изучением) (Str вулканов) (Str занимается) (Str 'вулканология.'))
+   1	Изучением	_	X	_	_	4	dep	_	_
+   2	вулканов	_	X	_	_	4	dep	_	_
+   3	занимается	_	X	_	_	4	dep	_	_
+   4	вулканология.	_	X	_	_	0	root	_	_
+
+
+
+   # text = Он проводился около с Мексиканского побережья с апреля по июнь.
+   # analyses = 0
+   # parsetree = (Chunks (Str Он) (Str проводился) (Str около) (Str с) (Str Мексиканского) (Str побережья) (Str с) (Str апреля) (Str по) (Str 'июнь.'))
+   1	Он	_	X	_	_	10	dep	_	_
+   2	проводился	_	X	_	_	10	dep	_	_
+   3	около	_	X	_	_	10	dep	_	_
+   4	с	_	X	_	_	10	dep	_	_
+   5	Мексиканского	_	X	_	_	10	dep	_	_
+   6	побережья	_	X	_	_	10	dep	_	_
+   7	с	_	X	_	_	10	dep	_	_
+   8	апреля	_	X	_	_	10	dep	_	_
+   9	по	_	X	_	_	10	dep	_	_
+   10	июнь.	_	X	_	_	0	root	_	_
+
+
+
+   # text = он собирал карты и торговал ими с другими мальчиками
+   # analyses = 0
+   # parsetree = (Chunks (Str он) (Str собирал) (Str карты) (Str и) (Str торговал) (Str ими) (Str с) (Str другими) (Str мальчиками))
+   1	он	_	X	_	_	9	dep	_	_
+   2	собирал	_	X	_	_	9	dep	_	_
+   3	карты	_	X	_	_	9	dep	_	_
+   4	и	_	X	_	_	9	dep	_	_
+   5	торговал	_	X	_	_	9	dep	_	_
+   6	ими	_	X	_	_	9	dep	_	_
+   7	с	_	X	_	_	9	dep	_	_
+   8	другими	_	X	_	_	9	dep	_	_
+   9	мальчиками	_	X	_	_	0	root	_	_
+
+
+
+   # text = это преступление подразумевает тюремное заключение на 5 лет
+   # analyses = 0
+   # parsetree = (Chunks (Str это) (Str преступление) (Str подразумевает) (Str тюремное) (Str заключение) (Str на) (Str '5') (Str лет))
+   1	это	_	X	_	_	8	dep	_	_
+   2	преступление	_	X	_	_	8	dep	_	_
+   3	подразумевает	_	X	_	_	8	dep	_	_
+   4	тюремное	_	X	_	_	8	dep	_	_
+   5	заключение	_	X	_	_	8	dep	_	_
+   6	на	_	X	_	_	8	dep	_	_
+   7	5	_	X	_	_	8	dep	_	_
+   8	лет	_	X	_	_	0	root	_	_
+
+
+
+   # text = новости разнеслись по всем деревням района
+   # analyses = 0
+   # parsetree = (Chunks (Str новости) (Str разнеслись) (Str по) (Str всем) (Str деревням) (Str района))
+   1	новости	_	X	_	_	6	dep	_	_
+   2	разнеслись	_	X	_	_	6	dep	_	_
+   3	по	_	X	_	_	6	dep	_	_
+   4	всем	_	X	_	_	6	dep	_	_
+   5	деревням	_	X	_	_	6	dep	_	_
+   6	района	_	X	_	_	0	root	_	_
+
+
+
+   # text = Я несу эти мысли в глубине сознания
+   # analyses = 0
+   # parsetree = (Chunks (Str Я) (Str несу) (Str эти) (Str мысли) (Str в) (Str глубине) (Str сознания))
+   1	Я	_	X	_	_	7	dep	_	_
+   2	несу	_	X	_	_	7	dep	_	_
+   3	эти	_	X	_	_	7	dep	_	_
+   4	мысли	_	X	_	_	7	dep	_	_
+   5	в	_	X	_	_	7	dep	_	_
+   6	глубине	_	X	_	_	7	dep	_	_
+   7	сознания	_	X	_	_	0	root	_	_
+
+
+
+   # text = Адам был бы перенесен в вечную жизнь
+   # analyses = 0
+   # parsetree = (Chunks (Str Адам) (Str был) (Str бы) (Str перенесен) (Str в) (Str вечную) (Str жизнь))
+   1	Адам	_	X	_	_	7	dep	_	_
+   2	был	_	X	_	_	7	dep	_	_
+   3	бы	_	X	_	_	7	dep	_	_
+   4	перенесен	_	X	_	_	7	dep	_	_
+   5	в	_	X	_	_	7	dep	_	_
+   6	вечную	_	X	_	_	7	dep	_	_
+   7	жизнь	_	X	_	_	0	root	_	_
+
+
+
+   # text = Обшивка прогнила и ее нужно было заменить
+   # analyses = 0
+   # parsetree = (Chunks (Str Обшивка) (Str прогнила) (Str и) (Str ее) (Str нужно) (Str было) (Str заменить))
+   1	Обшивка	_	X	_	_	7	dep	_	_
+   2	прогнила	_	X	_	_	7	dep	_	_
+   3	и	_	X	_	_	7	dep	_	_
+   4	ее	_	X	_	_	7	dep	_	_
+   5	нужно	_	X	_	_	7	dep	_	_
+   6	было	_	X	_	_	7	dep	_	_
+   7	заменить	_	X	_	_	0	root	_	_
+
+
+
+   # text = Она пришла в ярость от того, что эта девчонка осмеливается выставить ее дурой перед классом
+   # analyses = 0
+   # parsetree = (Chunks (Str Она) (Str пришла) (Str в) (Str ярость) (Str от) (Str 'того,') (Str что) (Str эта) (Str девчонка) (Str осмеливается) (Str выставить) (Str ее) (Str дурой) (Str перед) (Str классом))
+   1	Она	_	X	_	_	15	dep	_	_
+   2	пришла	_	X	_	_	15	dep	_	_
+   3	в	_	X	_	_	15	dep	_	_
+   4	ярость	_	X	_	_	15	dep	_	_
+   5	от	_	X	_	_	15	dep	_	_
+   6	того,	_	X	_	_	15	dep	_	_
+   7	что	_	X	_	_	15	dep	_	_
+   8	эта	_	X	_	_	15	dep	_	_
+   9	девчонка	_	X	_	_	15	dep	_	_
+   10	осмеливается	_	X	_	_	15	dep	_	_
+   11	выставить	_	X	_	_	15	dep	_	_
+   12	ее	_	X	_	_	15	dep	_	_
+   13	дурой	_	X	_	_	15	dep	_	_
+   14	перед	_	X	_	_	15	dep	_	_
+   15	классом	_	X	_	_	0	root	_	_
+
+
+
+   #+end_src
+** 3 modify the grammar to suit Russian
+#+BEGIN_SRC sh :results output code
+tail -n+1 lab1/data/lab1.ru.txt | ./lab1/gfud dbnf lab1/Russian.dbnf Utt
+#+END_SRC
+
+#+RESULTS:
+#+begin_src sh
+
+# text = Кто:<PRON> они:<PRON> ?:<PUNCT>
+# analyses = 1
+# parsetree = (Utt (Utt (QS (IP Кто) (NP (Pron они)))) (Punct '?'))
+1	Кто	_	PRON	_	_	0	root	_	_
+2	они	_	PRON	_	_	1	nsubj	_	_
+3	?	_	PUNCT	_	_	1	punct	_	_
+
+
+
+# text = маленький:<ADJ> город:<NOUN> с:<ADP> двумя:<NUM> минаретами:<NOUN> проплывает:<VERB> мимо:<ADV> .:<PUNCT>
+# analyses = 22
+# parsetree = (Utt (Utt (S (NP (NP (CN (AP (A маленький)) (CN (N город)))) (NP_obl (Prep с) (NP (Num (Card двумя)) (NP (CN (N минаретами)))))) (VP (VP (V проплывает)) (Adv мимо)))) (Punct '.'))
+1	маленький	_	ADJ	_	_	2	amod	_	_
+2	город	_	NOUN	_	_	6	nsubj	_	_
+3	с	_	ADP	_	_	5	case	_	_
+4	двумя	_	NUM	_	_	5	nummod	_	_
+5	минаретами	_	NOUN	_	_	2	nmod	_	_
+6	проплывает	_	VERB	_	_	0	root	_	_
+7	мимо	_	ADV	_	_	6	advmod	_	_
+8	.	_	PUNCT	_	_	6	punct	_	_
+
+
+
+# text = Я:<PRON> был:<AUX> лишь:<ADV> мальчиком:<NOUN> в:<ADP> грязных:<ADJ> ботинках:<NOUN> .:<PUNCT>
+# analyses = 19
+# parsetree = (Utt (Utt (QS (IP Я) (cop был) (neg лишь) (Comp (NP (NP (CN (N мальчиком))) (NP_obl (Prep в) (NP (CN (AP (A грязных)) (CN (N ботинках))))))))) (Punct '.'))
+1	Я	_	PRON	_	_	4	nsubj	_	_
+2	был	_	AUX	_	_	4	cop	_	_
+3	лишь	_	ADV	_	_	4	advmod	_	_
+4	мальчиком	_	NOUN	_	_	0	root	_	_
+5	в	_	ADP	_	_	7	case	_	_
+6	грязных	_	ADJ	_	_	7	amod	_	_
+7	ботинках	_	NOUN	_	_	4	nmod	_	_
+8	.	_	PUNCT	_	_	4	punct	_	_
+
+
+
+# text = Шеньженьская:<ADJ> дорожная:<ADJ> полиция:<NOUN> и:<PART> ранее:<ADV> предпочитала:<VERB> нетрадиционные:<ADJ> взыскания:<NOUN> .:<PUNCT>
+# analyses = 2
+# parsetree = (Utt (Utt (NP (NP (CN (AP (A Шеньженьская)) (CN (AP (A дорожная)) (CN (N полиция))))) (SC (S_that (S (VP (AdV (и и) (AdV ранее)) (VP (V предпочитала))) (NP (CN (AP (A нетрадиционные)) (CN (N взыскания))))))))) (Punct '.'))
+1	Шеньженьская	_	ADJ	_	_	3	amod	_	_
+2	дорожная	_	ADJ	_	_	3	amod	_	_
+3	полиция	_	NOUN	_	_	0	root	_	_
+4	и	_	PART	_	_	5	advmod	_	_
+5	ранее	_	ADV	_	_	6	advmod	_	_
+6	предпочитала	_	VERB	_	_	3	acl	_	_
+7	нетрадиционные	_	ADJ	_	_	8	amod	_	_
+8	взыскания	_	NOUN	_	_	6	nsubj	_	_
+9	.	_	PUNCT	_	_	3	punct	_	_
+
+
+
+# text = Изучением:<NOUN> вулканов:<NOUN> занимается:<VERB> вулканология:<NOUN> .:<PUNCT>
+# analyses = 8
+# parsetree = (Utt (Utt (S (VP (NP (CN (N (N Изучением) (N вулканов)))) (V2 занимается)) (NP (CN (N вулканология))))) (Punct '.'))
+1	Изучением	_	NOUN	_	_	2	nmod	_	_
+2	вулканов	_	NOUN	_	_	3	obj	_	_
+3	занимается	_	VERB	_	_	0	root	_	_
+4	вулканология	_	NOUN	_	_	3	nsubj	_	_
+5	.	_	PUNCT	_	_	3	punct	_	_
+
+
+
+# text = Он:<PRON> проводился:<VERB> около:<ADP> Мексиканского:<ADJ> побережья:<NOUN> с:<ADP> апреля:<NOUN> по:<ADP> июнь:<NOUN>.
+# analyses = 0
+# parsetree = (Chunks (RS (NP (Pron Он)) (VPSlash (VP (V2 проводился) (NP_obl (Prep около) (NP (NP (CN (AP (A Мексиканского)) (CN (N побережья)))) (NP_obl (Prep с) (NP (CN (N апреля))))))) (Prep по))) (Str 'июнь:<NOUN>.'))
+1	Он	_	PRON	_	_	2	nsubj	_	_
+2	проводился	_	VERB	_	_	9	dep	_	_
+3	около	_	ADP	_	_	5	case	_	_
+4	Мексиканского	_	ADJ	_	_	5	amod	_	_
+5	побережья	_	NOUN	_	_	2	obl	_	_
+6	с	_	ADP	_	_	7	case	_	_
+7	апреля	_	NOUN	_	_	5	nmod	_	_
+8	по	_	ADP	_	_	2	case	_	_
+9	июнь:<NOUN>.	_	X	_	_	0	root	_	_
+
+
+
+# text = он собирал карты и торговал ими с другими мальчиками
+# analyses = 0
+# parsetree = (Chunks (Str он) (Str собирал) (Str карты) (и и) (Str торговал) (Str ими) (Str с) (Str другими) (Str мальчиками))
+1	он	_	X	_	_	9	dep	_	_
+2	собирал	_	X	_	_	9	dep	_	_
+3	карты	_	X	_	_	9	dep	_	_
+4	и	_	PART	_	_	9	dep	_	_
+5	торговал	_	X	_	_	9	dep	_	_
+6	ими	_	X	_	_	9	dep	_	_
+7	с	_	X	_	_	9	dep	_	_
+8	другими	_	X	_	_	9	dep	_	_
+9	мальчиками	_	X	_	_	0	root	_	_
+
+
+
+# text = это преступление подразумевает тюремное заключение на 5 лет
+# analyses = 0
+# parsetree = (Chunks (Str это) (Str преступление) (Str подразумевает) (Str тюремное) (Str заключение) (Str на) (Str '5') (Str лет))
+1	это	_	X	_	_	8	dep	_	_
+2	преступление	_	X	_	_	8	dep	_	_
+3	подразумевает	_	X	_	_	8	dep	_	_
+4	тюремное	_	X	_	_	8	dep	_	_
+5	заключение	_	X	_	_	8	dep	_	_
+6	на	_	X	_	_	8	dep	_	_
+7	5	_	X	_	_	8	dep	_	_
+8	лет	_	X	_	_	0	root	_	_
+
+
+
+# text = новости разнеслись по всем деревням района
+# analyses = 0
+# parsetree = (Chunks (Str новости) (Str разнеслись) (Str по) (Str всем) (Str деревням) (Str района))
+1	новости	_	X	_	_	6	dep	_	_
+2	разнеслись	_	X	_	_	6	dep	_	_
+3	по	_	X	_	_	6	dep	_	_
+4	всем	_	X	_	_	6	dep	_	_
+5	деревням	_	X	_	_	6	dep	_	_
+6	района	_	X	_	_	0	root	_	_
+
+
+
+# text = Я несу эти мысли в глубине сознания
+# analyses = 0
+# parsetree = (Chunks (Str Я) (Str несу) (Str эти) (Str мысли) (Str в) (Str глубине) (Str сознания))
+1	Я	_	X	_	_	7	dep	_	_
+2	несу	_	X	_	_	7	dep	_	_
+3	эти	_	X	_	_	7	dep	_	_
+4	мысли	_	X	_	_	7	dep	_	_
+5	в	_	X	_	_	7	dep	_	_
+6	глубине	_	X	_	_	7	dep	_	_
+7	сознания	_	X	_	_	0	root	_	_
+
+
+
+# text = Адам был бы перенесен в вечную жизнь
+# analyses = 0
+# parsetree = (Chunks (Str Адам) (Str был) (Str бы) (Str перенесен) (Str в) (Str вечную) (Str жизнь))
+1	Адам	_	X	_	_	7	dep	_	_
+2	был	_	X	_	_	7	dep	_	_
+3	бы	_	X	_	_	7	dep	_	_
+4	перенесен	_	X	_	_	7	dep	_	_
+5	в	_	X	_	_	7	dep	_	_
+6	вечную	_	X	_	_	7	dep	_	_
+7	жизнь	_	X	_	_	0	root	_	_
+
+
+
+# text = Обшивка прогнила и ее нужно было заменить
+# analyses = 0
+# parsetree = (Chunks (Str Обшивка) (Str прогнила) (и и) (Str ее) (Str нужно) (Str было) (Str заменить))
+1	Обшивка	_	X	_	_	7	dep	_	_
+2	прогнила	_	X	_	_	7	dep	_	_
+3	и	_	PART	_	_	7	dep	_	_
+4	ее	_	X	_	_	7	dep	_	_
+5	нужно	_	X	_	_	7	dep	_	_
+6	было	_	X	_	_	7	dep	_	_
+7	заменить	_	X	_	_	0	root	_	_
+
+
+
+# text = Она пришла в ярость от того, что эта девчонка осмеливается выставить ее дурой перед классом
+# analyses = 0
+# parsetree = (Chunks (Str Она) (Str пришла) (Str в) (Str ярость) (Str от) (Str 'того,') (Str что) (Str эта) (Str девчонка) (Str осмеливается) (Str выставить) (Str ее) (Str дурой) (Str перед) (Str классом))
+1	Она	_	X	_	_	15	dep	_	_
+2	пришла	_	X	_	_	15	dep	_	_
+3	в	_	X	_	_	15	dep	_	_
+4	ярость	_	X	_	_	15	dep	_	_
+5	от	_	X	_	_	15	dep	_	_
+6	того,	_	X	_	_	15	dep	_	_
+7	что	_	X	_	_	15	dep	_	_
+8	эта	_	X	_	_	15	dep	_	_
+9	девчонка	_	X	_	_	15	dep	_	_
+10	осмеливается	_	X	_	_	15	dep	_	_
+11	выставить	_	X	_	_	15	dep	_	_
+12	ее	_	X	_	_	15	dep	_	_
+13	дурой	_	X	_	_	15	dep	_	_
+14	перед	_	X	_	_	15	dep	_	_
+15	классом	_	X	_	_	0	root	_	_
+
+
+
+#+end_src
+
+#+RESULTS:
+
+
+Notes:
+1. For sentence 3 it seems to produce alternative but acceptable parse.
+2. 
+**  COMMENT test one sentence
+
+#+BEGIN_SRC sh :results output code
+echo "Изучением:<NOUN> вулканов:<NOUN> занимается:<VERB> вулканология:<NOUN> .:<PUNCT>" | ./lab1/gfud dbnf lab1/Russian.dbnf Utt -show=5
+#+END_SRC
+
+** 4 test PUD
+??? need PoS tags first...
+
