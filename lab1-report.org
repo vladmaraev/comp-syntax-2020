@@ -1600,7 +1600,7 @@ tail -n+1 lab1/data/lab1.ru.txt | ./lab1/gfud dbnf lab1/Russian.dbnf Utt
 #+END_SRC
 
 #+RESULTS:
-#+begin_src sh
+#+begin_src conllu :exports both
 
 # text = Кто:<PRON> они:<PRON> ?:<PUNCT>
 # analyses = 1
