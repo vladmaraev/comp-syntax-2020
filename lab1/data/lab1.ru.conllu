@@ -1,0 +1,132 @@
+# text_ru = Кто:<PRON> они:<PRON> ?:<PUNCT>
+1	кто	_	PRON	_	_	0	root	_	_
+2	они	_	PRON	_	_	1	nsubj	_	_
+3	?	_	PUNCT	_	_	1	punct	_	_
+
+# text_ru = маленький:<ADJ> город:<NOUN> с:<ADP> двумя:<NUM> минаретами:<NOUN> проплывает:<VERB> мимо:<ADV> .:<PUNCT>
+1	маленький	_	ADJ	_	_	2	amod	_	_
+2	город	_	NOUN	_	_	6	nsubj	_	_
+3	с	_	ADP	_	_	5	case	_	_
+4	двумя	_	NUM	_	_	5	nummod	_	_
+5	минаретами	_	NOUN	_	_	2	nmod	_	_
+6	проплывает	_	VERB	_	_	0	root	_	_
+7	мимо	_	ADV	_	_	6	advmod	_	_
+8	.	_	PUNCT	_	_	6	punct	_	_
+
+# text_ru = Я:<PRON> был:<AUX> лишь:<ADV> мальчиком:<NOUN> в:<ADP> грязных:<ADJ> ботинках:<NOUN> .:<PUNCT>
+1	Я	_	PRON	_	_	2	nsubj	_	_
+2	был	_	AUX	_	_	0	root	_	_
+3	лишь	_	ADV	_	_	4	advmod	_	_
+4	мальчиком	_	NOUN	_	_	2	iobj	_	_
+5	в	_	ADP	_	_	7	case	_	_
+6	грязных	_	ADJ	_	_	7	amod	_	_
+7	ботинках	_	NOUN	_	_	4	nmod	_	_
+8	.	_	PUNCT	_	_	2	punct	_	_
+
+# text_ru = Шеньженьская:<ADJ> дорожная:<ADJ> полиция:<NOUN> и:<PART> ранее:<ADV> предпочитала:<VERB> нетрадиционные:<ADJ> взыскания:<NOUN> .:<PUNCT>
+1	Шеньженьская	_	ADJ	_	_	3	amod	_	_
+2	дорожная	_	ADJ	_	_	3	amod	_	_
+3	полиция	_	NOUN	_	_	6	nsubj	_	_
+4	и	_	CCONJ	_	_	5	advmod	_
+5	ранее	_	ADV	_	_	6	advmod	_	_
+6	предпочитала	_	NOUN	_	_	0	root	_	_
+7	нетрадиционные	_	ADJ	_	_	8	amod	_	_
+8	взыскания	_	NOUN	_	_	6	obj	_	_
+9	.	_	PUNCT	_	_	6	punct		_	_
+
+# text_ru = Изучением вулканов занимается вулканология.
+# NOTE: in gold corpus 1 is marked as iobj, but according to the guidelines:
+#       "In general, if there is just one object, it should be labeled obj, regardless of the morphological case or semantic role."
+#       https://universaldependencies.org/ru/dep/iobj.html
+1	Изучением	_	NOUN	_	_	3	obj	_	_
+2	вулканов	_	NOUN	_	_	1	nmod	_	_
+3	занимается	_	VERB	_	_	0	root	_	_
+4	вулканология	_	NOUN	_	_	3	nsubj	_	_
+5	.	_	PUNCT	_	_	3	punct	_	_
+
+# text_ru = Он проводился около с Мексиканского побережья с апреля по июнь.
+# NOTE: 9 is attached according to english UD, in Russian gold PUD it is attached to 2
+1	Он	_	PRON	_	_	2	nsubj:pass	_	_
+2	проводился	_	VERB	_	_	0	root	_	_
+3	около	_	ADV	_	_	5	advmod	_	_
+4	Мексиканского	_	ADJ	_	_	5	amod	_	_
+5	побережья	_	NOUN	_	_	2	obl	_	_
+6	с	_	ADP	_	_	7	case	_	_
+7	апреля	_	NOUN	_	_	2	obl	_	_
+8	по	_	ADP	_	_	9	case	_	_
+9	июнь	_	NOUN	_	_	7	nmod	_	_
+10	.	_	PUNCT	_	_	2	punct	_	_
+
+# text_ru = он собирал карты и торговал ими с другими мальчиками
+1	он	_	PRON	_	_	1	nsubj	_
+2	собирал	_	VERB	_	_	0	root	_
+3	карты	_	NOUN	_	_	2	obj	_
+4	и	_	CCONJ	_	_	5	cc	_
+5	торговал	_	VERB	_	_	2	conj	_
+6	ими	_	NOUN	_	_	5	cc	_
+7	с	_	ADP	_	_	9	case	_
+8	другими	_	ADJ	_	_	9	amod	_
+9	мальчиками	_	NOUN	_	_	5	obl	_
+
+# text_ru = это преступление подразумевает тюремное заключение на 5 лет
+1	это	_	PRON	_	_	2	det	_	_
+2	преступление	_	NOUN	_	_	3	nsubj	_	_
+3	подразумевает	_	VERB	_	_	0	root	_	_
+4	тюремное	_	ADJ	_	_	5	amod	_	_
+5	заключение	_	NOUN	_	_	3	obj	_	_
+6	на	_	ADP	_	_	8	case	_	_
+7	5	_	NUM	_	_	8	nummod	_	_
+8	лет	_	NOUN	_	_	5	nmod	_	_
+
+# text_ru = новости разнеслись по всем деревням района
+1	новости	_	NOUN	_	_	2	nsubj:pass	_	_
+2	разнеслись	_	VERB	_	_	0	root	_	_
+3	по	_	ADP	_	_	5	case	_	_
+4	всем	_	PRON	_	_	5	det	_	_
+5	деревням	_	NOUN	_	_	2	obl	_	_
+6	района	_	NOUN	_	_	5	nmod	_	_
+
+# text_ru = Я несу эти мысли в глубине сознания
+1	Я	_	PRON	_	_	2	_	_	_
+2	несу	_	VERB	_	_	0	_	_	_
+3	эти	_	DET	_	_	4	_	_	_
+4	мысли	_	NOUN	_	_	2	_	_	_
+5	в	_	ADP	_	_	6	_	_	_
+6	глубине	_	NOUN	_	_	2	_	_	_
+7	сознания	_	NOUN	_	_	6	_	_	_
+
+# text_ru = Адам был бы перенесен в вечную жизнь
+1	Адам	_	NOUN	_	_	4	nsubj:pass	_	_
+2	был	_	AUX	_	_	4	aux	_	_
+3	бы	_	AUX	_	_	4	aux	_	_
+4	перенесен	_	VERB	_	_	0	root	_	_
+5	в	_	ADP	_	_	7	case	_	_
+6	вечную	_	ADJ	_	_	7	amod	_	_
+7	жизнь	_	NOUN	_	_	4	obl	_	_
+
+# text_ru = Обшивка прогнила и ее нужно было заменить
+1	Обшивка	_	NOUN	_	_	2	nsubj	_	_
+2	прогнила	_	VERB	_	_	0	root	_	_
+3	и	_	CCONJ	_	_	5	cc	_	_
+4	ее	_	PRON	_	_	5	nsubj	_	_
+5	нужно	_	VERB	_	_	2	conj	_	_
+6	было	_	AUX	_	_	7	aux	_	_
+7	заменить	_	VERB	_	_	5	xcomp	_	_
+
+# text_ru = Она пришла в ярость от того, что эта девчонка осмеливается выставить ее дурой перед классом
+1	Она	_	PRON	_	_	2	nsubj	_	_
+2	пришла	_	VERB	_	_	0	root	_	_
+3	в	_	ADP	_	_	4	case	_	_
+4	ярость	_	NOUN	_	_	2	obl	_	_
+5	от	_	ADP	_	_	6	case	_	_
+6	того	_	PRON	_	_	4	nmod	_	_
+7	,	_	PUNCT	_	_	11	punct	_	_
+8	что	_	SCONJ	_	_	11	mark	_	_
+9	эта	_	DET	_	_	10	det	_	_
+10	девчонка	_	NOUN	_	_	11	nsubj	_	_
+11	осмеливается	_	VERB	_	_	6	ccomp	_	_
+12	выставить	_	VERB	_	_	11	xcomp	_	_
+13	ее	_	PRON	_	_	12	obj	_	_
+14	дурой	_	NOUN	_	_	12	iobj	_	_
+15	перед	_	ADP	_	_	16	case	_	_
+16	классом	_	NOUN	_	_	12	obl	_	_
