@@ -1595,12 +1595,12 @@ Examples from the lab:
 
    #+end_src
 ** 3 modify the grammar to suit Russian
-#+BEGIN_SRC sh :results output code
+#+BEGIN_SRC sh :results output code :exports both
 tail -n+1 lab1/data/lab1.ru.txt | ./lab1/gfud dbnf lab1/Russian.dbnf Utt
 #+END_SRC
 
 #+RESULTS:
-#+begin_src conllu :exports both
+#+begin_src sh
 
 # text = Кто:<PRON> они:<PRON> ?:<PUNCT>
 # analyses = 1
